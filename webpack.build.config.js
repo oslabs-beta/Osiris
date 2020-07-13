@@ -9,8 +9,7 @@ const defaultInclude = path.resolve(__dirname, 'src')
 
 module.exports = {
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
@@ -21,17 +20,23 @@ module.exports = {
       },
       {
         test: /\.jsx?$/,
-        use: [{ loader: 'babel-loader' }],
+        use: [{
+          loader: 'babel-loader'
+        }],
         include: defaultInclude
       },
       {
         test: /\.(jpe?g|png|gif)$/,
-        use: [{ loader: 'file-loader?name=img/[name]__[hash:base64:5].[ext]' }],
+        use: [{
+          loader: 'file-loader?name=img/[name]__[hash:base64:5].[ext]'
+        }],
         include: defaultInclude
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
-        use: [{ loader: 'file-loader?name=font/[name]__[hash:base64:5].[ext]' }],
+        use: [{
+          loader: 'file-loader?name=font/[name]__[hash:base64:5].[ext]'
+        }],
         include: defaultInclude
       }
     ]
