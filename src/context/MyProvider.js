@@ -1,3 +1,5 @@
+
+
 import MyContext from './MyContext';
 
 class MyProvider extends Component {
@@ -19,3 +21,5 @@ class MyProvider extends Component {
         );
     }
 }
+
+export default MyProvider;
