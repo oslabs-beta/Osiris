@@ -7,6 +7,7 @@ import { PG_URI } from '../pgKeys';
 import Generator from '../containers/Generator.jsx';
 import UiLibrary from '../containers/UiLibrary.jsx';
 import DetailPage from '../containers/DetailPage.jsx';
+import MyProvider from '../context/MyProvider.js';
 const pool = new Pool({ connectionString: PG_URI });
 class App extends Component {
 	render() {

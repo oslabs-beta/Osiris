@@ -1,21 +1,19 @@
 import MyContext from './MyContext';
+import React, { Component } from 'react';
 
 class MyProvider extends Component {
-	state = {
-		uiItems: [],
-		user: [],
-		organization: []
-	};
+	constructor() {
+		super();
+		this.state = {
+			uiItems: [],
+			user: [],
+			organization: []
+		};
+	}
 
 	render() {
-		return (
-			<MyContext.Provider
-				value={{
-					// reducer like methods to change state
-				}}
-			>
-				{this.props.children}
-			</MyContext.Provider>
-		);
+		return <MyContext.Provider value={this.state}>{this.props.children}</MyContext.Provider>;
 	}
 }
+
+export default MyProvider;
