@@ -1,1 +1,19 @@
+.generator-container {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
 
+.top-container {
+	height: 50%;
+}
+
+.bottom-container {
+	height: 50%;
+}
+
+.bottom-container button {
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid grey;
+}

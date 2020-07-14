@@ -1,28 +1,46 @@
 import '../assets/css/App.css';
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import ReactDom from 'react-dom';
 import { Pool } from 'pg';
 import { PG_URI } from '../pgKeys';
+import Generator from '../containers/Generator.jsx';
+import UiLibrary from '../containers/UiLibrary.jsx';
+import DetailPage from '../containers/DetailPage.jsx';
 
 const pool = new Pool({ connectionString: PG_URI });
 
 class App extends Component {
 	render() {
 		return (
-			<div>
-				<h1>Hello, Electron!</h1>
+			<Router>
+				<div className="navbar">
+					<ul>
+						<li>
+							<Link to="/">UI Library</Link>
+						</li>
+						<li>
+							<Link to="/generator">UI Generator</Link>
+						</li>
+						<li>
+							<Link to="/detailPage">Detail Page</Link>
+						</li>
+					</ul>
+				</div>
+				{/* a SWITCH statement to look through all ROUTE elements*/}
 
-				<p>I hope you enjoy using basic-electron-react-boilerplate to start your dev off right!</p>
-				<button
-					onClick={() => {
-						pool.query('SELECT * FROM individual_ui').then((data) => {
-							console.log(`data rows ${data.rows[0].image}`);
-							// // console.log(`data id ${data.id}`);
-						});
-					}}
-				>
-					CLICK MEEEE
-				</button>
-			</div>
+				<Switch>
+					<Route exact path="/">
+						<UiLibrary />
+					</Route>
+					<Route exact path="/generator">
+						<Generator />
+					</Route>
+					<Route exact path="/detailPage">
+						<DetailPage />
+					</Route>
+				</Switch>
+			</Router>
 		);
 	}
 }
