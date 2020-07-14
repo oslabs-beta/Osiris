@@ -52,3 +52,7 @@ ehthumbs.db
 # Windows shortcuts #
 #####################
 *.lnk
+
+# PG KEYS#
+#####################
+/src/pgKeys.js
