@@ -1,19 +1,48 @@
 .generator-container {
-	display: flex;
-	flex-direction: column;
-	height: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .top-container {
-	height: 50%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-container button {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  margin: 5px;
+  width: 10em;
+  background-color: white;
 }
 
 .bottom-container {
-	height: 50%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
 }
 
 .bottom-container button {
-	padding: 10px;
-	border-radius: 5px;
-	border: 1px solid grey;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  margin: 5px;
+  background-color: white;
+}
+
+.bottom-container input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  margin: 5px;
+}
+
+.bottom-container select {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  margin: 5px;
 }
