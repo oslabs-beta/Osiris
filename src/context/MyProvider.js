@@ -1,23 +1,37 @@
 import MyContext from "./MyContext";
-import React, { Component } from "react";
+import React, { useState } from "react";
+export const Context = React.createContext();
 
-class MyProvider extends Component {
-  constructor() {
-    super();
-    this.state = {
-      uiItems: [],
-      user: [],
-      organization: [],
-    };
-  }
+export const MyProvider = (props) => {
+  const initialState = {
+    list: [
+      {
+        itemId: 1,
+        task: "Add the delete functionality",
+        completed: false,
+      },
+    ],
+  };
 
-  render() {
-    return (
-      <MyContext.Provider value={this.state}>
-        {this.props.children}
-      </MyContext.Provider>
-    );
-  }
-}
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case "add_uis":
+        console.log(action);
+        setUiItems(action.payload);
+        return state;
+      default:
+        return state;
+    }
+  };
 
-export default MyProvider;
+  const [UiItems, setUiItems] = useState("");
+  const [user, setUser] = useState("");
+  const [organization, setOrganization] = useState("");
+  const [globalState, dispatch] = React.useReducer(reducer, initialState);
+  console.log(globalState);
+  return (
+    <Context.Provider value={{ globalState, dispatch }}>
+      {props.children}
+    </Context.Provider>
+  );
+};
