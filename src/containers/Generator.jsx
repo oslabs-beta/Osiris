@@ -2,11 +2,16 @@ import "../assets/css/App.css";
 import React, { Component } from "react";
 
 export default class Generator extends Component {
+  handleFileChange(e) {
+    const file = e.target.files[0];
+    console.log(file);
+  }
+
   render() {
     return (
       <div className="generator-container">
         <div className="top-container">
-          <button>Upload Image</button>
+          <input type="file" onChange={this.handleFileChange} />
           <div className="image-container" />
         </div>
         <div className="bottom-container">
