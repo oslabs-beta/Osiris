@@ -8,7 +8,6 @@ import Generator from "../containers/Generator.jsx";
 import UiLibrary from "../containers/UiLibrary.jsx";
 import DetailPage from "../containers/DetailPage.jsx";
 import { Context, MyProvider } from "../context/MyProvider.js";
-import MyContext from "../context/MyContext";
 /*
 useEffect(() => {
   const subscription = props.source.subscribe();
