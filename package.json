@@ -39,6 +39,9 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@aws-amplify/ui-react": "^0.2.11",
+    "aws-amplify": "^3.0.20",
+    "aws-sdk": "^2.714.0",
     "pg": "^8.3.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -69,6 +72,9 @@
     "webpack-dev-server": "^3.11.0"
   },
   "lint-staged": {
-    "*.js": ["prettier --write", "git add"]
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }
