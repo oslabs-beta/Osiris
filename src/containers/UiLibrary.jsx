@@ -11,8 +11,8 @@ const UiLibrary = (props) => {
   }, []);
 
   return (
-    <Context.Consumer>
-      {({ globalState }) => (
+   <Context.Consumer>
+     {({ globalState }) => (
         <div className="libraryContainer">
           UiLibrary
           {globalState.uiItems.map((item) => {
@@ -32,7 +32,7 @@ const UiLibrary = (props) => {
           })}
         </div>
       )}
-    </Context.Consumer>
+   </Context.Consumer>
   );
 };
 
