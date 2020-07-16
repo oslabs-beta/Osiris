@@ -7,32 +7,23 @@ import { PG_URI } from '../pgKeys';
 import Generator from '../containers/Generator.jsx';
 import UiLibrary from '../containers/UiLibrary.jsx';
 import DetailPage from '../containers/DetailPage.jsx';
-import { Context, MyProvider } from '../context/MyProvider.js';
-import MyContext from '../context/MyContext';
-/*
-useEffect(() => {
-  const subscription = props.source.subscribe();
-  return () => {
-    // Clean up the subscription
-    subscription.unsubscribe();
-  };
-});
-*/
+import { Context } from '../context/MyProvider.js';
+
 const pool = new Pool({ connectionString: PG_URI });
 function App() {
 	// const [state, dispatch] = useReducer(reducer, initialArg, init);
-	const { globalContext, dispatch } = React.useContext(Context);
+	const { globalState, dispatch } = React.useContext(Context);
 
 	useEffect(() => {
-		pool.query('SELECT * FROM individual_ui').then((data) =>
-			//data.rows[0]
-			dispatch({ type: 'add_uis', payload: data.rows[0] })
-		);
+		pool.query('SELECT * FROM individual_ui').then((data) => {
+			dispatch({ type: 'add_uis', payload: data.rows });
+			console.log('App: ', globalState);
+		});
 	}, []);
 
 	return (
 		<Context.Consumer>
-			{(context) => (
+			{({ globalState }) => (
 				<Router>
 					<div className="navbar">
 						<ul>
@@ -64,32 +55,3 @@ function App() {
 	);
 }
 export default App;
-
-/*
-<Router>
-        <div className="navbar">
-          <ul>
-            <li>
-              <Link to="/">UI Library</Link>
-            </li>
-            <li>
-              <Link to="/generator">UI Generator</Link>
-            </li>
-            <li>
-              <Link to="/detailPage">Detail Page</Link>
-            </li>
-          </ul>
-        </div>
-        <Switch>
-          <Route exact path="/">
-            <UiLibrary />
-          </Route>
-          <Route exact path="/generator">
-            <Generator />
-          </Route>
-          <Route exact path="/detailPage">
-            <DetailPage />
-          </Route>
-        </Switch>
-      </Router>
-*/
