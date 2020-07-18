@@ -1,5 +1,6 @@
 import "../assets/css/App.css";
 import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
 import { Storage } from "aws-amplify";
 import { Context } from "../context/MyProvider.js";
 import { Pool } from "pg";
@@ -8,7 +9,7 @@ const pool = new Pool({ connectionString: PG_URI });
 
 // configure Storage
 
-export default function Generator(props) {
+function Generator(props) {
   // const [imageFile, changeImageFile] = useState('');
   // const [tags, setTags] = useState('');
   // const [reactCode, changeReactCode] = useState('');
@@ -25,11 +26,15 @@ export default function Generator(props) {
     buttonText: "",
     placeholder: "",
     image: "",
+    file: "",
   });
 
   function handleFileChange(e) {
     const file = e.target.files[0];
-    changeImageFile(file);
+    setUserData({
+      ...userData,
+      file,
+    });
     console.log("File...", file);
   }
 
@@ -41,58 +46,64 @@ export default function Generator(props) {
   }
   // setUserData({ ...userData, [name]: value });
 
-  function handleClick() {
+  async function handleClick() {
     console.log("state: ", userData);
 
-    // Storage.put(imageFile.name, imageFile)
-    //   .then((result) => console.log("Result...", result))
-    //   .catch((error) => {
-    //     console.log("Error...", error);
-    //     throw error;
-    //   });
+    try {
+      const result = await Storage.put(userData.file.name, userData.file);
+      console.log("Result...", result);
 
-    let reactCode;
-    const {
-      htmlTags,
-      buttonText,
-      placeholder,
-      searchTags,
-      description,
-      fileName,
-      image,
-    } = userData;
-    switch (htmlTags) {
-      case "button":
-        reactCode = `<${htmlTags}>${buttonText}</${htmlTags}>`;
-        break;
-      case "input":
-        reactCode = `<${htmlTags} placeholder=${placeholder}></${htmlTags}>`;
-        break;
-      default:
-        reactCode = `<${htmlTags}></${htmlTags}>`;
-        break;
-    }
-    // SQL Query individual_ui table: id(auto generated), organization_id, image, tags,react_code, vue_code, file_name, type, description
-    console.log("reactCode: ", reactCode);
+      const url = await Storage.get(userData.file.name);
 
-    // send data to database
-    pool
-      .query(
-        "INSERT INTO individual_ui(image, tags, react_code, file_name, type, description) VALUES($1, $2, $3, $4, $5, $6 )",
-        [image, searchTags, reactCode, fileName, htmlTags, description]
-      )
-      .then((data) => {
-        console.log(data.rows);
-        // dispatch({ type: "add_details", payload: data.rows[0] });
+      console.log(`url ${url}`);
 
-        // update the global state/Context
-        pool.query("SELECT * FROM individual_ui").then((data) => {
-          dispatch({ type: "add_uis", payload: data.rows });
-          // console.log("App: ", globalState);
-          // redirect to detail page of component
-          // window.history.push('/detailPage')
+      let reactCode;
+      const {
+        htmlTags,
+        buttonText,
+        placeholder,
+        searchTags,
+        description,
+        fileName,
+      } = userData;
+      switch (htmlTags) {
+        case "button":
+          reactCode = `<${htmlTags}>${buttonText}</${htmlTags}>`;
+          break;
+        case "input":
+          reactCode = `<${htmlTags} placeholder=${placeholder}></${htmlTags}>`;
+          break;
+        default:
+          reactCode = `<${htmlTags}></${htmlTags}>`;
+          break;
+      }
+      // SQL Query individual_ui table: id(auto generated), organization_id, image, tags,react_code, vue_code, file_name, type, description
+      console.log("reactCode: ", reactCode);
+
+      // send data to database
+      pool
+        .query(
+          "INSERT INTO individual_ui(image, tags, react_code, file_name, type, description) VALUES($1, $2, $3, $4, $5, $6 )",
+          [url, searchTags, reactCode, fileName, htmlTags, description]
+        )
+        .then((data) => {
+          console.log(data.rows);
+
+          // update the global state/Context
+          pool.query("SELECT * FROM individual_ui").then((data) => {
+            dispatch({ type: "add_uis", payload: data.rows });
+            dispatch({
+              type: "add_details",
+              payload: data.rows[data.rows.length - 1],
+            });
+            // console.log("App: ", globalState);
+            // redirect to detail page of component
+            props.history.push("/detailPage");
+          });
         });
-      });
+    } catch (err) {
+      console.warn(err);
+    }
   }
 
   return (
@@ -151,3 +162,5 @@ export default function Generator(props) {
     </div>
   );
 }
+
+export default withRouter(Generator);
