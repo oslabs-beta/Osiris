@@ -4,6 +4,7 @@ export const Context = React.createContext();
 export const MyProvider = (props) => {
   const initialState = {
     uiItems: [],
+    details: {}
   };
 
   const [globalState, dispatch] = React.useReducer(reducer, initialState);
@@ -12,7 +13,11 @@ export const MyProvider = (props) => {
     switch (action.type) {
       case "add_uis":
         // setUiItems(action.payload);
+        console.log('add_uis state: ', { ...state, uiItems: action.payload })
         return { ...state, uiItems: action.payload };
+      case "add_details":
+        console.log('add_details state:', { ...state, details: action.payload })
+        return { ...state, details: action.payload };
       default:
         return state;
     }
