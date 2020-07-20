@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 export const Context = React.createContext();
 
 export const MyProvider = (props) => {
+	// uiItems = all items
+	// details = latest item's details from generator
 	const initialState = {
 		uiItems: [],
 		details: {}
@@ -12,12 +14,10 @@ export const MyProvider = (props) => {
 	function reducer(state, action) {
 		switch (action.type) {
 			case 'add_uis':
-				// setUiItems(action.payload);
-				console.log('add_uis state: ', { ...state, uiItems: action.payload });
 				return { ...state, uiItems: action.payload };
 			case 'add_details':
-				console.log('add_details state:', { ...state, details: action.payload });
-				return { ...state, details: action.payload };
+				const { uiItems } = action.payload; //uiItems = data.rows from generator
+				return { ...state, details: uiItems[uiItems.length - 1], uiItems };
 			default:
 				return state;
 		}
