@@ -2,7 +2,7 @@ import '../assets/css/App.css';
 import React from 'react';
 
 const UiItem = (props) => {
-	console.log('uiitem props: ', props);
+	// console.log('uiitem props: ', props);
 	return (
 		<div className="oneUIBox">
 			<img src={props.image} alt={props.file_name} width="150" height="150" />
