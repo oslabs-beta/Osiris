@@ -7,11 +7,31 @@ import { Storage } from 'aws-amplify';
 
 const UiLibrary = (props) => {
 	const { globalState, dispatch } = React.useContext(Context);
-	const [ uiItems, setUiItems ] = useState([]);
+
+	const handlePromises = () => {
+		// map uiItem => [promises]
+		const uiItemsPromises = globalState.uiItems.map((obj) => {
+			return Storage.get(`${obj.file_name}.jpg`);
+		});
+		Promise.all(uiItemsPromises).then((results) => {
+			// once get all promises resolved in results (arr of urls), then update state
+			for (let i = 0; i < results.length; i += 1) {
+				dispatch({
+					type: 'update_url',
+					payload: {
+						url: results[i],
+						id: globalState.uiItems[i].id
+					}
+				});
+			}
+		});
+	};
+
+	useEffect(() => {
+		handlePromises();
+	}, []);
 
 	const onClick = (e) => {
-		console.log(`e.target.id ${e.target.id}`);
-		console.log(e.target);
 		dispatch({
 			type: 'uiLibrary_details',
 			payload: e.target.id
@@ -19,32 +39,31 @@ const UiLibrary = (props) => {
 		props.history.push('/detailPage');
 	};
 
-	// const getURL = async (filename) => {
-	//   const url = await Storage.get(filename);
-	//   return url;
-	// };
+	const renderItems = () => {
+		return globalState.uiItems.map((item) => {
+			// item = {id: 1, file_name: '', description: '', react_code: ''}
+			const { id, name, file_name, type, description, url } = item;
+
+			return (
+				<UiItem
+					key={id}
+					file_name={file_name}
+					type={type}
+					id={id}
+					url={url}
+					description={description}
+					onClick={onClick}
+				/>
+			);
+		});
+	};
 
 	return (
 		<div className="libraryContainer">
 			UiLibrary
-			{globalState.uiItems.map((item) => {
-				console.log(item);
-				// item = {id: 1, file_name: '', description: '', react_code: ''}
-				const { id, name, file_name, type, description } = item;
-
-				return (
-					<UiItem
-						key={id}
-						file_name={file_name}
-						type={type}
-						id={id}
-						description={description}
-						onClick={onClick}
-					/>
-				);
-			})}
+			{renderItems()}
 		</div>
 	);
 };
 
-export default UiLibrary;
+export default withRouter(UiLibrary);

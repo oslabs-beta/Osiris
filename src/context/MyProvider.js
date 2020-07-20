@@ -30,7 +30,6 @@ export const MyProvider = (props) => {
 				let uiItemsCopy = [ ...state.uiItems ];
 				const uiItem = uiItemsCopy.filter((item) => item.id === parseInt(action.payload.id));
 				uiItem[0].url = action.payload.url;
-
 				return { ...state, uiItems: uiItemsCopy };
 			default:
 				return state;
