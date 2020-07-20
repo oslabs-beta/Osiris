@@ -4,22 +4,24 @@ import { Context } from '../context/MyProvider.js';
 const detailPage = (props) => {
 	const { globalState } = React.useContext(Context);
 	// destructured global state for latest component from generator
+	console.log(globalState.details);
+
 	const {
-		id,
+		// id,
 		organization_id,
-		image,
 		tags,
 		react_code,
 		vue_code,
 		file_name,
 		type,
-		description
+		description,
+		url
 	} = globalState.details;
 	return (
 		<div className="detailpage">
 			DETAIL PAGE
 			<div className="image-container">
-				<img src={image} alt={file_name} className="detail-img" width="150" height="150" />
+				<img src={url} alt={file_name} className="detail-img" width="150" height="150" />
 			</div>
 			<ul>
 				<li>

@@ -13,7 +13,7 @@ function Generator(props) {
 	// htmlTags, buttonText, placeholder - compiled into react code
 	// file only for handleFileChange
 	const [ userData, setUserData ] = useState({
-		htmlTags: '',
+		htmlTags: 'div',
 		searchTags: '',
 		reactCode: '',
 		description: '',
@@ -21,7 +21,7 @@ function Generator(props) {
 		buttonText: '',
 		placeholder: '',
 		image: '',
-		file: ''
+		s3file: ''
 	});
 
 	// uploading files
@@ -29,7 +29,7 @@ function Generator(props) {
 		const file = e.target.files[0];
 		setUserData({
 			...userData,
-			file
+			s3file: file
 		});
 	}
 	// typed input updating state
@@ -45,9 +45,9 @@ function Generator(props) {
 		e.preventDefault();
 		try {
 			// puts info into bucket
-			await Storage.put(userData.file.name, userData.file);
-			// grabbing url of image from bucket
-			const url = await Storage.get(userData.file.name);
+			let image = await Storage.put(`${userData.fileName}.jpg`, userData.s3file);
+
+			console.log(image);
 
 			const { htmlTags, buttonText, placeholder, searchTags, description, fileName } = userData;
 
@@ -68,22 +68,28 @@ function Generator(props) {
 			// send new data to database
 			pool
 				.query(
-					'INSERT INTO individual_ui(image, tags, react_code, file_name, type, description) VALUES($1, $2, $3, $4, $5, $6 )',
-					[ url, searchTags, reactCode, fileName, htmlTags, description ]
+					'INSERT INTO individual_ui(tags, react_code, file_name, type, description) VALUES($1, $2, $3, $4, $5 )',
+					[ searchTags, reactCode, fileName, htmlTags, description ]
 				)
 				.then((data) => {
 					// update the global state/Context
 					pool.query('SELECT * FROM individual_ui').then((data) => {
-						dispatch({
-							type: 'add_details',
-							payload: {
-								uiItems: data.rows
-							}
+						let item = data.rows[data.rows.length - 1]; // just added item
+						Storage.get(`${item.file_name}.jpg`).then((url) => {
+							item.url = url;
+							dispatch({
+								type: 'generator_add_details',
+								payload: {
+									uiItems: data.rows,
+									item: item
+								}
+							});
+							// redirect to detail page of component
+							props.history.push('/detailPage');
 						});
-						// redirect to detail page of component
-						props.history.push('/detailPage');
 					});
-				});
+				})
+				.catch((err) => console.log(err));
 		} catch (err) {
 			console.warn(err);
 		}
@@ -92,7 +98,7 @@ function Generator(props) {
 	return (
 		<div className="generator-container">
 			<div className="top-container">
-				<input type="file" onChange={handleFileChange} />
+				<input type="file" accept="image/x-png,image/gif,image/jpeg" onChange={handleFileChange} />
 				<div className="image-container" />
 			</div>
 			<div className="bottom-container">
