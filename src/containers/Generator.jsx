@@ -75,7 +75,7 @@ function Generator(props) {
 					// update the global state/Context
 					pool.query('SELECT * FROM individual_ui').then((data) => {
 						dispatch({
-							type: 'generator_add_details',
+							type: 'add_details',
 							payload: {
 								uiItems: data.rows
 							}

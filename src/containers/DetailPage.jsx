@@ -4,9 +4,8 @@ import { Context } from '../context/MyProvider.js';
 const detailPage = (props) => {
 	const { globalState } = React.useContext(Context);
 	// destructured global state for latest component from generator
-	console.log(globalState.details);
 	const {
-		// id,
+		id,
 		organization_id,
 		image,
 		tags,
