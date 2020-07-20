@@ -15,9 +15,13 @@ export const MyProvider = (props) => {
 		switch (action.type) {
 			case 'add_uis':
 				return { ...state, uiItems: action.payload };
-			case 'add_details':
+			case 'generator_add_details':
 				const { uiItems } = action.payload; //uiItems = data.rows from generator
 				return { ...state, details: uiItems[uiItems.length - 1], uiItems };
+
+			case 'uiLibrary_details':
+				const detail = state.uiItems.filter((item) => item.id === parseInt(action.payload));
+				return { ...state, details: detail[0] };
 			default:
 				return state;
 		}

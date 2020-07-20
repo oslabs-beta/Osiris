@@ -2,10 +2,21 @@ import '../assets/css/App.css';
 import React, { useEffect, useState } from 'react';
 import { Context } from '../context/MyProvider.js';
 import UiItem from './UiItem.jsx';
+import { withRouter } from 'react-router-dom';
 
 const UiLibrary = (props) => {
 	const { globalState, dispatch } = React.useContext(Context);
 	const [ uiItems, setUiItems ] = useState([]);
+
+	const onClick = (e) => {
+		console.log(`e.target.id ${e.target.id}`);
+		console.log(e.target);
+		dispatch({
+			type: 'uiLibrary_details',
+			payload: e.target.id
+		});
+		props.history.push('/detailPage');
+	};
 
 	return (
 		<div className="libraryContainer">
@@ -22,6 +33,7 @@ const UiLibrary = (props) => {
 						type={type}
 						id={id}
 						description={description}
+						onClick={onClick}
 					/>
 				);
 			})}
@@ -29,4 +41,4 @@ const UiLibrary = (props) => {
 	);
 };
 
-export default UiLibrary;
+export default withRouter(UiLibrary);
