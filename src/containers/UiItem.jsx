@@ -10,6 +10,9 @@ const UiItem = (props) => {
 			<h2>{props.type}</h2>
 			<h2>{props.id}</h2>
 			<h2>{props.description}</h2>
+			<button id={props.id} onClick={props.onClick}>
+				Details
+			</button>
 		</div>
 	);
 };
