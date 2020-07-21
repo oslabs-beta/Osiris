@@ -1,3 +1,10 @@
+.detailpage {
+  grid-column: 2;
+  padding: 10px;
+  background-image: url('../images/blue_bg_please.jpg');
+  background-repeat: repeat;
+}
+
 .detail-img {
   height: 100px;
 }

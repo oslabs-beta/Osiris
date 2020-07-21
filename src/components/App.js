@@ -1,6 +1,6 @@
 import "../assets/css/App.css";
 import React, { useEffect, useReducer } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
 import ReactDom from "react-dom";
 import { Pool } from "pg";
 import { PG_URI } from "../pgKeys";
@@ -24,7 +24,8 @@ function App() {
     <Context.Consumer>
       {({ globalState }) => (
         <Router>
-          <div className="navbar">
+            <div className="navbar">
+              <img src='https://i.imgur.com/HM3EwJ5.jpg' className='logo' alt='osiris' width="180" height="180" />
             <ul>
               <li>
                 <Link to="/">UI Library</Link>
@@ -32,11 +33,11 @@ function App() {
               <li>
                 <Link to="/generator">UI Generator</Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/detailPage">Detail Page</Link>
-              </li>
-            </ul>
-          </div>
+              </li> */}
+             </ul>
+            </div>
           <Switch>
             <Route exact path="/">
               <UiLibrary />
@@ -47,6 +48,7 @@ function App() {
             <Route exact path="/detailPage">
               <DetailPage />
             </Route>
+            <Route render={() => <Redirect to="/"/>}/>
           </Switch>
         </Router>
       )}

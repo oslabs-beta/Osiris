@@ -1,0 +1,49 @@
+.generator-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  grid-column: 2;
+  padding-left: 15px;
+  background-image: url('../images/blue_bg_please.jpg');
+  background-repeat: repeat;
+}
+
+.generator-container button {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  margin: 5px;
+  width: 10em;
+  background-color: white;
+  height: 50px;
+}
+
+.submitButton {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  margin: 5px;
+  width: 10em;
+  background-color: white;
+  height: 50px;
+}
+
+.top-container,
+.bottom-container {
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.bottom-container input,
+.bottom-container select {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  margin: 5px;
+}
+
+#imageupload {
+ max-width: 500px;
+ max-height: 250px;
+}
