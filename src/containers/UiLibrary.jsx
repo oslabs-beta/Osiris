@@ -1,72 +1,48 @@
-import "../assets/css/UiLibrary.css";
-import React, { useEffect, useState } from "react";
-import { Context } from "../context/MyProvider.js";
-import UiItem from "./UiItem.jsx";
-import { withRouter } from "react-router-dom";
-import { Storage } from "aws-amplify";
+import '../assets/css/UiLibrary.css';
+import React, { useEffect, useState } from 'react';
+import { Context } from '../context/MyProvider.js';
+import UiItem from './UiItem.jsx';
+import { withRouter } from 'react-router-dom';
+import { Storage } from 'aws-amplify';
 
 const UiLibrary = (props) => {
-  const { globalState, dispatch } = React.useContext(Context);
+	const { globalState, dispatch } = React.useContext(Context);
 
-  const handlePromises = () => {
-    // map uiItem => [promises]
-    const uiItemsPromises = globalState.uiItems.map((obj) => {
-      return Storage.get(`${obj.file_name}.jpg`);
-    });
-    Promise.all(uiItemsPromises).then((results) => {
-      for (let i = 0; i < results.length; i += 1) {
-        dispatch({
-          type: "update_url",
-          payload: {
-            url: results[i],
-            id: globalState.uiItems[i].id,
-          },
-        });
-      }
-    });
-  };
+	const onClick = (e) => {
+		dispatch({
+			type: 'uiLibrary_details',
+			payload: e.target.id
+		});
+		props.history.push('/detailPage');
+	};
 
-  useEffect(() => {
-    handlePromises();
-  }, []);
+	const renderItems = () => {
+		return globalState.uiItems.map((item) => {
+			// item = {id: 1, file_name: '', description: '', react_code: ''}
+			const { id, name, file_name, type, description, url } = item;
 
-  const onClick = (e) => {
-    dispatch({
-      type: "uiLibrary_details",
-      payload: e.target.id,
-    });
-    props.history.push("/detailPage");
-  };
+			return (
+				<UiItem
+					key={id}
+					file_name={file_name}
+					type={type}
+					id={id}
+					url={url}
+					description={description}
+					onClick={onClick}
+				/>
+			);
+		});
+	};
 
-  const renderItems = () => {
-    return globalState.uiItems.map((item) => {
-      // item = {id: 1, file_name: '', description: '', react_code: ''}
-      const { id, name, file_name, type, description, url } = item;
-
-      return (
-        <UiItem
-          key={id}
-          file_name={file_name}
-          type={type}
-          id={id}
-          url={url}
-          description={description}
-          onClick={onClick}
-        />
-      );
-    });
-  };
-
-  return (
-    <div className="libraryContainer">
-      <div className='libraryHeader'>
-      <h1>UiLibrary</h1>
-      </div>
-      <div className="ui-library">
-        {renderItems()}
-      </div>
-    </div>
-  );
+	return (
+		<div className="libraryContainer">
+			<div className="libraryHeader">
+				<h1>UiLibrary</h1>
+			</div>
+			<div className="ui-library">{renderItems()}</div>
+		</div>
+	);
 };
 
 export default withRouter(UiLibrary);
