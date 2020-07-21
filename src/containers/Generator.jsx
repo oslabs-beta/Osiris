@@ -1,4 +1,4 @@
-import "../assets/css/App.css";
+import "../assets/css/Generator.css";
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { Storage } from "aws-amplify";
@@ -27,11 +27,21 @@ function Generator(props) {
   // uploading files
   function handleFileChange(e) {
     const file = e.target.files[0];
+    const reader = new FileReader();
+    const imgtag = document.getElementById("imageupload");
+    imgtag.title = file.name;
+
+    reader.onload = function(event) {
+      imgtag.src = event.target.result;
+    };
+
+    reader.readAsDataURL(file);
     setUserData({
       ...userData,
       s3file: file,
     });
   }
+
   // typed input updating state
   function handleChange(e) {
     setUserData({
@@ -104,13 +114,16 @@ function Generator(props) {
 
   return (
     <div className="generator-container">
+      <h1 className="heading-generator">UI Generator</h1>
       <div className="top-container">
         <input
           type="file"
           accept="image/x-png,image/gif,image/jpeg"
           onChange={handleFileChange}
         />
-        <div className="image-container" />
+        <div className="image-container" >
+          <img id='imageupload' src=''/>
+        </div>
       </div>
       <div className="bottom-container">
         <form onSubmit={handleClick}>
@@ -158,7 +171,7 @@ function Generator(props) {
             onChange={handleChange}
             value={userData.description}
           />
-          <button type="submit">Submit</button>
+          <button className='submitButton' type="submit">Submit</button>
         </form>
       </div>
     </div>

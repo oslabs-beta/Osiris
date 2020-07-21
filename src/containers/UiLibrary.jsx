@@ -1,4 +1,4 @@
-import "../assets/css/App.css";
+import "../assets/css/UiLibrary.css";
 import React, { useEffect, useState } from "react";
 import { Context } from "../context/MyProvider.js";
 import UiItem from "./UiItem.jsx";
@@ -59,8 +59,12 @@ const UiLibrary = (props) => {
 
   return (
     <div className="libraryContainer">
-      UiLibrary
-      {renderItems()}
+      <div className='libraryHeader'>
+      <h1>UiLibrary</h1>
+      </div>
+      <div className="ui-library">
+        {renderItems()}
+      </div>
     </div>
   );
 };

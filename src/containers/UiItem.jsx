@@ -1,4 +1,4 @@
-import "../assets/css/App.css";
+import "../assets/css/UiItem.css";
 import React from "react";
 
 const UiItem = (props) => {

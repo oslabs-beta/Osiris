@@ -1,0 +1,70 @@
+.oneUIBox {
+  margin: 10px;
+  max-width: 500px;
+  max-height: 500px;
+  background-color: white;/* #c3d3d0; */
+    border-radius: 10px;
+
+  box-shadow: 0px 0px 20px rgba(0,0,0, .5);
+  display: flex; 
+  flex-direction: column;
+  box-sizing: border-box;
+  min-width: 150px;
+  min-height: 150px;
+  order: 4;
+  flex: 1 ;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  justify-content: center;
+  align-items: center;
+  padding: 2em 0em;
+}
+img {
+  margin-top: 2em;
+  justify-self: center ;
+  align-self: center;
+  border-radius: inherit;
+
+} 
+
+h2 {
+  overflow: hidden;
+  white-space: nowrarp;
+  text-overflow: ellipsis;
+  max-width: 250px;
+  min-width: 200px;
+  border-radius: inherit;
+  text-decoration: none;
+  background: #CFD8DC;
+  font: 14px/1 sans-serif;
+  color: black;
+  padding: 0.5em 1em;
+  /*padding: 0.5rem 1rem; */
+  border-radius: 4px;
+
+  /*
+    margin-top: 0;
+    padding: 0;
+    max-width: 400px;
+    max-height: 75px;
+    background-color: white;
+    border-radius: inherit;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 20px;
+    white-space: nowrap;
+    font-weight: 400; 
+  */
+}
+
+button {
+    max-width: 200px;
+    max-height: 100px;
+    margin-bottom: 5px;
+    
+    background-color: #d28e4f;
+    border-radius: inherit;
+    font-family: 'Courier New', Courier, monospace;
+    text-decoration-color: blue;
+
+}

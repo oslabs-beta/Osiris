@@ -1,4 +1,4 @@
-import '../assets/css/Detailpage.css';
+import '../assets/css/DetailPage.css';
 import React from 'react';
 import { Context } from '../context/MyProvider.js';
 const detailPage = (props) => {
