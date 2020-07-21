@@ -26,6 +26,7 @@ export const MyProvider = (props) => {
 				const detail = state.uiItems.filter((item) => item.id === parseInt(action.payload));
 				return { ...state, details: detail[0] };
 			case 'update_url':
+				console.log('WOOT');
 				// updating the url for specific uiItem
 				let uiItemsCopy = [ ...state.uiItems ];
 				const uiItem = uiItemsCopy.filter((item) => item.id === parseInt(action.payload.id));
