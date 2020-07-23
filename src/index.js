@@ -6,11 +6,25 @@ import App from "./components/App";
 import { MyProvider } from "./context/MyProvider.js";
 
 Amplify.configure(awsExports);
+// create a script tag for our favicons and append the head. 
+// let favicons = `<script src="https:\/\/kit.fontawesome.com\/ff1e868718.js" crossorigin="anonymous"><\/script>`;
+const favicons = document.createElement("script");
+favicons.setAttribute("src" , "https://kit.fontawesome.com/ff1e868718.js");
+favicons.setAttribute('crossorigin', 'anonymous');
+console.log(favicons);
+document.head.appendChild(favicons);
+
+
+
 // Since we are using HtmlWebpackPlugin WITHOUT a template, we should create our own root node in the body element before rendering into it
 let root = document.createElement("div");
 
 root.id = "root";
 document.body.appendChild(root);
+
+
+
+
 
 render(
   <MyProvider>

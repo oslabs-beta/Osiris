@@ -19,8 +19,9 @@ export const MyProvider = (props) => {
 				console.log('payload', action.payload);
 				return { ...state, uiItems: action.payload };
 			case 'generator_add_details':
-				const { item } = action.payload; //uiItems = data.rows from generator
-				return { ...state, details: item, uiItems: [ ...state.uiItems, item ] };
+				const {  item } = action.payload; //uiItems = data.rows from generator
+
+				return { ...state, details: item, uiItems: [...state.uiitems, item] };
 			case 'uiLibrary_details':
 				const detail = state.uiItems.filter((item) => item.id === parseInt(action.payload));
 				return { ...state, details: detail[0] };
