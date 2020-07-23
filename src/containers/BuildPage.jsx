@@ -6,13 +6,14 @@ import LeftContainer from './LeftContainer.jsx';
 import TopContainer from './TopContainer.jsx';
 
 const BuildPage = (props) => {
-	const { globalState } = React.useContext(Context);
-  const [localState, setLocalState] =  useState({localUiItems: []});
+	const { globalState, dispatch } = React.useContext(Context);
   
   const onClick = (e) => {
-    const id = e.target.id;
-    const globalItem = globalState.uiItems.filter(item => item.id == id)[0];
-		setLocalState({localUiItems: [...localState.localUiItems, globalItem]})
+
+		dispatch({  
+			type: 'updateBuildUiItems',
+			payload: e.target.id
+		})		
 	};
     
 	return (
@@ -24,10 +25,10 @@ const BuildPage = (props) => {
                 <LeftContainer />
 			</div>
 			<div className="top-container">
-                <TopContainer items={localState.localUiItems}  />
+                <TopContainer items={globalState.buildUiItems}  />
 			</div>
 			<div className="bottom-container">
-				<UiLibrary handleClick={onClick} />
+				<UiLibrary handleClick={onClick} buttonText='Add to Build' />
 			</div>
 		</div>
 	);

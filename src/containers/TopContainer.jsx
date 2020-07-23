@@ -1,23 +1,17 @@
 import '../assets/css/TopContainer.css';
 import React from 'react';
-import {leftArrow} from '../assets/images/favicons/leftArrow.js';
-import {rightArrow} from '../assets/images/favicons/rightArrow.js';
-import {upArrow} from '../assets/images/favicons/upArrow.js';
-import {downArrow} from '../assets/images/favicons/downArrow.js';
+import BuildItem from '../components/BuildItem.jsx';
 
 
 const TopContainer = (props) => {
+  console.log(`props ${props}`);
   const { items } = props;
+  console.log('topContainer item:' , items);
+
   return (
     <div className='topContainer'>TOP CONTAINER
-    {items.map(item => (
-      <div>
-        <li>{item.file_name}</li>
-        {upArrow}
-        {rightArrow}
-        {downArrow}
-        {leftArrow}
-      </div>
+    {items && items.map(item => (
+      <BuildItem id={item.id} key={item.id} item={item} />
     ))}
     </div>
   )

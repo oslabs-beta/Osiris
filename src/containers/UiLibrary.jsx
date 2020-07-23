@@ -8,8 +8,7 @@ import { Storage } from 'aws-amplify';
 const UiLibrary = (props) => {
 	const { globalState, dispatch } = React.useContext(Context);
 
-	// const onClick = (e) => {
-	// 	dispatch({
+	// const onClick = (e) =>	// 	dispatch({
 	// 		type: 'uiLibrary_details',
 	// 		payload: e.target.id
 	// 	});
@@ -30,6 +29,7 @@ const UiLibrary = (props) => {
 					url={url}
 					description={description}
 					onClick={props.handleClick}
+					buttonText={props.buttonText}
 				/>
 			);
 		});

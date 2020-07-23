@@ -79,7 +79,7 @@ function App() {
 					</div>
 					<Switch>
 						<Route exact path="/">
-							<UiLibrary handleClick={onClick} />
+							<UiLibrary handleClick={onClick} buttonText='Details' />
 						</Route>
 						<Route exact path="/generator">
 							<Generator />
