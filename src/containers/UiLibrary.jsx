@@ -9,6 +9,7 @@ const UiLibrary = (props) => {
   const { globalState, dispatch } = React.useContext(Context);
 
   const renderItems = () => {
+    console.log("uilibrary: ", globalState.uiItems);
     return globalState.uiItems.map((item) => {
       // item = {id: 1, file_name: '', description: '', react_code: ''}
       const { id, name, file_name, type, description, url } = item;

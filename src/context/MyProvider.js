@@ -26,8 +26,8 @@ export const MyProvider = (props) => {
       case "generator_add_details":
         const { item } = action.payload; //uiItems = data.rows from generator
         let copy = [...state.uiItems, item];
-
-        return { ...state, details: item, uiItems: [copy] };
+        console.log("generator_add_details: ", copy);
+        return { ...state, details: item, uiItems: [...copy] };
       case "uiLibrary_details":
         const detail = state.uiItems.filter(
           (item) => item.id === parseInt(action.payload)
