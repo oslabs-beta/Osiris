@@ -41,5 +41,10 @@ export const MyProvider = (props) => {
 	// const [user, setUser] = useState("");
 	// const [organization, setOrganization] = useState("");
 
-	return <Context.Provider value={{ globalState, dispatch }}>{props.children}</Context.Provider>;
+	return (
+		<Context.Provider value={{ globalState, dispatch }}>
+		{props.children}
+		</Context.Provider>
+	);
 };
+
