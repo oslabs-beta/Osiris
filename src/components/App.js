@@ -7,12 +7,22 @@ import { PG_URI } from '../pgKeys';
 import Generator from '../containers/Generator.jsx';
 import UiLibrary from '../containers/UiLibrary.jsx';
 import DetailPage from '../containers/DetailPage.jsx';
+import BuildPage from '../containers/BuildPage.jsx';
 import { Context } from '../context/MyProvider.js';
 import { Storage } from 'aws-amplify';
 
 const pool = new Pool({ connectionString: PG_URI });
 function App() {
 	const { globalState, dispatch } = React.useContext(Context);
+
+	// if used in Library, go to individual detailPage; if used in BuildPage, update Top Container
+	const onClick = (e) => {
+		dispatch({
+			type: 'uiLibrary_details',
+			payload: e.target.id
+		});
+		props.history.push('/detailPage');
+	};
 
 	const handlePromises = (itemsFromDB) => {
 		// itemsFromDB = database data.rows
@@ -59,6 +69,9 @@ function App() {
 							<li>
 								<Link to="/generator">UI Generator</Link>
 							</li>
+							<li>
+								<Link to="/buildpage">Build Page</Link>
+							</li>
 							{/* <li>
                 <Link to="/detailPage">Detail Page</Link>
               </li> */}
@@ -66,13 +79,16 @@ function App() {
 					</div>
 					<Switch>
 						<Route exact path="/">
-							<UiLibrary />
+							<UiLibrary handleClick={onClick} />
 						</Route>
 						<Route exact path="/generator">
 							<Generator />
 						</Route>
 						<Route exact path="/detailPage">
 							<DetailPage />
+						</Route>
+						<Route exact path="/buildpage">
+							<BuildPage />
 						</Route>
 						<Route render={() => <Redirect to="/" />} />
 					</Switch>

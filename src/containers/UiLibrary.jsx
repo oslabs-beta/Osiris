@@ -8,13 +8,13 @@ import { Storage } from 'aws-amplify';
 const UiLibrary = (props) => {
 	const { globalState, dispatch } = React.useContext(Context);
 
-	const onClick = (e) => {
-		dispatch({
-			type: 'uiLibrary_details',
-			payload: e.target.id
-		});
-		props.history.push('/detailPage');
-	};
+	// const onClick = (e) => {
+	// 	dispatch({
+	// 		type: 'uiLibrary_details',
+	// 		payload: e.target.id
+	// 	});
+	// 	props.history.push('/detailPage');
+	// };
 
 	const renderItems = () => {
 		return globalState.uiItems.map((item) => {
@@ -29,7 +29,7 @@ const UiLibrary = (props) => {
 					id={id}
 					url={url}
 					description={description}
-					onClick={onClick}
+					onClick={props.handleClick}
 				/>
 			);
 		});
