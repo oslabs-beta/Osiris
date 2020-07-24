@@ -27,7 +27,7 @@ const BuildPage = (props) => {
         <TopContainer items={globalState.buildUiItems} />
       </div>
       <div className="bottom-container">
-        <UiLibrary handleClick={onClick} buttonText="Add to Build" />
+        <UiLibrary page="buildpage" buttonText="Add to Build" />
       </div>
     </div>
   );
