@@ -22,7 +22,7 @@ const UiLibrary = (props) => {
           id={id}
           url={url}
           description={description}
-          onClick={props.handleClick}
+          page={props.page}
           buttonText={props.buttonText}
         />
       );
