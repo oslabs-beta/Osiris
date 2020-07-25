@@ -1,9 +1,10 @@
 "use strict";
 
 // Import parts of electron to use
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const path = require("path");
 const url = require("url");
+
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -30,6 +31,18 @@ if (process.platform === "win32") {
   app.commandLine.appendSwitch("high-dpi-support", "true");
   app.commandLine.appendSwitch("force-device-scale-factor", "1");
 }
+
+
+// Choose directory
+ipcMain.on('choose_app_dir', async (event) => {
+  const directory = await dialog.showOpenDialog(mainWindow, {
+    properties: ['openDirectory'],
+  });
+
+  if (!directory) return;
+  event.sender.send('app_dir_selected', directory.filePaths[0]);
+});
+
 
 function createWindow() {
   // Create the browser window.
