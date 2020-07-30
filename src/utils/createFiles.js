@@ -1,4 +1,7 @@
 import fs from "fs";
+import {
+  format
+} from "prettier";
 import componentRender from "./componentRender.js";
 
 const createFiles = async (items, path, DLFileName, selectedState) => {
@@ -13,38 +16,18 @@ const createFiles = async (items, path, DLFileName, selectedState) => {
       fs.mkdirSync(dir);
     }
   }
-  // const promises = [];
-  // const newPromise = new Promise((resolve, reject) => {
-  //   fs.writeFile(
-  //     `${dir}/${DLFileName}.jsx`,
-  //     // format(componentRender(component, items), {
-  //     //   singleQuote: true,
-  //     //   trailingComma: "es5",
-  //     //   bracketSpacing: true,
-  //     //   jsxBracketSameLine: true,
-  //     //   parser: "babylon",
-  //     // }),
-  //     componentRender(items, selectedState, DLFileName),
-  //     (err) => {
-  //       if (err) return reject(err.message);
-  //       return resolve(path);
-  //     }
-  //   );
-  // });
-  // promises.push(newPromise);
 
-  // return Promise.all(promises);
+  console.log(format)
 
   await fs.writeFile(
     `${dir}/${DLFileName}.jsx`,
-    // format(componentRender(component, items), {
-    //   singleQuote: true,
-    //   trailingComma: "es5",
-    //   bracketSpacing: true,
-    //   jsxBracketSameLine: true,
-    //   parser: "babylon",
-    // }),
-    componentRender(items, selectedState, DLFileName),
+    format(componentRender(items, selectedState, DLFileName), {
+      singleQuote: true,
+      trailingComma: "es5",
+      bracketSpacing: true,
+      jsxBracketSameLine: true,
+      // parser: "babel",
+    }),
     (err) => {
       console.warn(err);
     }
