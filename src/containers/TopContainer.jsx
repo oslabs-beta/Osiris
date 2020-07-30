@@ -39,7 +39,7 @@ const TopContainer = (props) => {
   function renderItems(items) {
     return items.map((item) => {
       if (Array.isArray(item)) return renderItems(item);
-      return <BuildItem id={item.id} key={item.id} item={item} />;
+      return <BuildItem id={item.id} key={item.buildId} item={item} />;
     });
   }
 

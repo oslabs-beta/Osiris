@@ -7,7 +7,7 @@ const UiItem = (props) => {
   const { globalState, dispatch } = React.useContext(Context);
 
   const onClick = (e) => {
-    console.log(props.handleCLick);
+    console.log('onClick add uiItem', props.page);
     if (props.page === "uilibrary") {
       dispatch({
         type: "uiLibrary_details",

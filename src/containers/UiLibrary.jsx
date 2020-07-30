@@ -5,6 +5,8 @@ import UiItem from "./UiItem.jsx";
 import { withRouter } from "react-router-dom";
 import { Storage } from "aws-amplify";
 
+import TopContainer from './TopContainer.jsx';
+
 const UiLibrary = (props) => {
   const { globalState, dispatch } = React.useContext(Context);
 
@@ -34,6 +36,7 @@ const UiLibrary = (props) => {
       <div className="libraryHeader">
         <h1>UiLibrary</h1>
       </div>
+      <TopContainer />
       <div className="ui-library">{renderItems()}</div>
     </div>
   );
