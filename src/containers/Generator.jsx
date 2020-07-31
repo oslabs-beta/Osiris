@@ -56,8 +56,6 @@ function Generator(props) {
 		try {
 			let image = await Storage.put(`${userData.fileName}.jpg`, userData.s3file);
 
-			console.log(image);
-
 			const { htmlTags, buttonText, placeholder, searchTags, description, fileName } = userData;
 
 			let reactCode;
