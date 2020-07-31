@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Storage } from "aws-amplify";
-
+const cloneDeep = require('lodash.clonedeep');
+let counter = 0;
+let toggle = false;
 export const Context = React.createContext();
 
 function findIndex(array, id) {
@@ -14,21 +16,46 @@ function findIndex(array, id) {
       console.log("i: ", i);
       console.log("nested index: ", nestedIndex);
     } else {
-      if (item.id === id) index = i;
+      if (item.buildId === id) index = i;
     }
   });
 
   return index;
 }
 
-function handleLeftClick(buildUiItems, itemToMove) {
+function shoveItIn(buildUiItems, itemToMove) {
+  
   if (Array.isArray(buildUiItems)) {
     buildUiItems.push(itemToMove);
     return buildUiItems;
   } else {
-    return [buildUiItems, itemToMove];
+    if(buildUiItems.type === 'div') {
+      // if itemsToMove is an array
+      // [{}, [{}, {}]]
+      if (Array.isArray(itemToMove)) {
+        return [buildUiItems].concat(itemToMove)
+      } else {
+        return [buildUiItems, itemToMove];
+      }
+    } else {
+      console.log('THIS SHOULD RUN')
+      alert('This element is not nestable.')
+      return buildUiItems
+    }
   }
 }
+  
+function pullOut(arr, targetIndex) { // pull out target and return updated nested arr
+    if (targetIndex === 0) return arr;
+    return arr.filter((el, index) => index !== targetIndex)
+  
+    // [[{div}, {button}, {input}, {input2}]] => [[{div}, {input}, {input2}], {button}] // return [{div}, {input}, {input2}]
+    // {div} index1
+    // index1& index2 ({button}) => index1+1 (1)
+    // if there was anything in buildUiItemsCopy at index 1 and onwards, just add it to the back
+    
+}
+  
 
 export const MyProvider = (props) => {
   // uiItems = all items
@@ -45,6 +72,7 @@ export const MyProvider = (props) => {
     let index;
     let buildUiItemsCopy;
     let temp;
+    let uiItemsCopy
 
     switch (action.type) {
       case "add_uis":
@@ -72,7 +100,7 @@ export const MyProvider = (props) => {
         };
       case "update_url":
         // updating the url for specific uiItem
-        let uiItemsCopy = [...state.uiItems];
+        uiItemsCopy = [...state.uiItems];
         const uiItem = uiItemsCopy.filter(
           (item) => item.id === parseInt(action.payload.id)
         );
@@ -82,19 +110,41 @@ export const MyProvider = (props) => {
           uiItems: uiItemsCopy,
         };
       case "updateBuildUiItems":
-        const newItem = state.uiItems.filter(
+        uiItemsCopy = cloneDeep(state.uiItems)
+        const newItemsCopy = uiItemsCopy.filter(
           (item) => item.id === parseInt(action.payload)
         )[0];
 
-        newItem.level = 0;
+        console.log('added item: ', newItemsCopy)
 
-        return {
-          ...state,
-          buildUiItems: [...state.buildUiItems, newItem],
-        };
+        newItemsCopy.level = 0;
+        newItemsCopy.buildId = Math.floor(Math.random()*1000);
+
+        buildUiItemsCopy = [...state.buildUiItems]
+        console.log('counter: ', counter++);
+        if(counter === 2 && !toggle){
+          toggle = true
+          buildUiItemsCopy.push(newItemsCopy);
+          counter = 0;
+          return {
+            ...state,
+            buildUiItems: buildUiItemsCopy,
+          };
+        } else if(counter === 1 && toggle ) {
+          buildUiItemsCopy.push(newItemsCopy);
+          counter = 0;
+          return {
+            ...state,
+            buildUiItems: buildUiItemsCopy,
+          }
+        } else {
+          return {...state}
+        }
+        //down&up to fix:
+        // when nested the parent and children should move up and down together
       case "upClick":
         buildUiItemsCopy = [...state.buildUiItems];
-        index = buildUiItemsCopy.indexOf(action.payload);
+        index = findIndex(buildUiItemsCopy, action.payload.buildId);
 
         if (index !== 0) {
           temp = buildUiItemsCopy[index];
@@ -108,7 +158,7 @@ export const MyProvider = (props) => {
 
       case "downClick":
         buildUiItemsCopy = [...state.buildUiItems];
-        index = buildUiItemsCopy.indexOf(action.payload);
+        index = findIndex(buildUiItemsCopy, action.payload.buildId);
 
         if (index !== state.buildUiItems.length - 1) {
           temp = buildUiItemsCopy[index];
@@ -123,51 +173,110 @@ export const MyProvider = (props) => {
         buildUiItemsCopy = [...state.buildUiItems];
         // index = buildUiItemsCopy.indexOf(action.payload);
 
+        // To Fix:
+          // case 1: NO: [[{div}, {button}]] => don't want [[[{div}, {button}]]] button wanting to shove into div again
+          // case 2: YES: [{div}, [{div2}, {button}], {button2}] => [[{div}, {div2}, {button}], {button2}]
+
         // <3 case 1: [ {div}, {button} ] => index: 1 => [[{div}, {button}]]
         // handleLeftClick => [{div}, {button}] at index 0
         // case 2: [[{div}, {button}], {button2}] => 2 => [ [ {div}, {button}, {button2} ] ]
         // case 3: [ [{div}, {input}, {button}] ] => [0, 1] ==> [ [ [{div}, {input}], {button}] ]
-
-        index = findIndex(buildUiItemsCopy, action.payload.id);
+        
+        index = findIndex(buildUiItemsCopy, action.payload.buildId);
         let updatedBuildState;
 
         // case 1 & 2 if index === number
         if (typeof index === "number") {
-          updatedBuildState = handleLeftClick(
-            buildUiItemsCopy[index - 1],
-            buildUiItemsCopy[index]
-          );
-          console.log(updatedBuildState);
+          // updatedBuildState = shoveItIn(
+          //   buildUiItemsCopy[index - 1],
+          //   buildUiItemsCopy[index]
+          // );
 
-          buildUiItemsCopy[index - 1] = updatedBuildState;
-          buildUiItemsCopy = buildUiItemsCopy
+          let temp = shoveItIn(
+              buildUiItemsCopy[index - 1],
+              buildUiItemsCopy[index]
+          );
+          // if no error, then modify, otherwise leave alone
+          if (temp !== buildUiItemsCopy[index - 1]) {
+            updatedBuildState = temp;
+            console.log(updatedBuildState);
+            
+            buildUiItemsCopy[index - 1] = updatedBuildState;
+            buildUiItemsCopy = buildUiItemsCopy
             .slice(0, index)
             .concat(buildUiItemsCopy.slice(index + 1));
+          } 
         } else {
           // case 3: [ [{div}, {input}, {button}] ]
           let [index1, index2] = index;
-          updatedBuildState = handleLeftClick(
-            buildUiItemsCopy[index1][index2 - 1],
-            buildUiItemsCopy[index1][index2]
-          ); // [{div}, {input}]
-          // case 3: {div} = [{div}, {input}] index === array
-          buildUiItemsCopy[index1][index2 - 1] = updatedBuildState; // [ [ [{div}, {input}], {input}, {button}] ]
 
-          let temp = buildUiItemsCopy[index1];
-
-          let newTemp = temp.slice(0, index2).concat(temp.slice(index2 + 1));
-          buildUiItemsCopy[index1] = newTemp;
+          if(index2 > 0){
+            // case 1: NO: [[{div}, {button}]]  // button = [index1, index2] = [0, 1]
+            return { ...state};
+          } else if (index2 === 0) // if nested arr's first item is a div
+          // case 2: YES: [{div}, [{div2}, {button}], {button2}] => [[{div}, {div2}, {button}], {button2}] // [index1, index2] = [1,0]
+          {
+            updatedBuildState = shoveItIn(buildUiItemsCopy[index1-1],buildUiItemsCopy[index1])
+          } 
+          // general cases 
+            updatedBuildState = shoveItIn(
+              buildUiItemsCopy[index1][index2 - 1],
+              buildUiItemsCopy[index1][index2]
+              ); // [{div}, {input}]
+              // case 3: {div} = [{div}, {input}] index === array
+              buildUiItemsCopy[index1][index2 - 1] = updatedBuildState; // [ [ [{div}, {input}], {input}, {button}] ]
+              
+              let temp = buildUiItemsCopy[index1];
+              
+              let newTemp = temp.slice(0, index2).concat(temp.slice(index2 + 1));
+              buildUiItemsCopy[index1] = newTemp;
+              
         }
         console.log("updated buildUiItemsCopy: ", buildUiItemsCopy);
 
         return { ...state, buildUiItems: buildUiItemsCopy };
       case "rightClick":
+
+        // To fix: 
+        // unnest again
+
+        // case 1 [[{div}, {button}]] => [{div}, {button}]
+        // case 1.25 [[{div}, {button}], {input}] => [{div}, {button}, {input}]
+        // case 1.5 [{input},[{div}, {button}], {input2}] => [{input},{div}, {button}, {input2}]
+        // case 2 [[[{div}, {button}]]] => case 1 [[{div}, {button}]] => [{div}, {button}]
+        // case 3: [{div}, [{div}, {input}]]
         buildUiItemsCopy = [...state.buildUiItems];
         // index = buildUiItemsCopy.indexOf(action.payload);
-        let id = action.payload.id;
-        index = findIndex(buildUiItemsCopy, id);
-        console.log("rightclick index: ", index);
-        return { ...state };
+        let id = action.payload.buildId;
+        index = findIndex(buildUiItemsCopy, id); // case 1 [0,1] // case 1.5 [1,1]
+        if (typeof index === 'number') {
+          return { ...state };
+        }
+
+        // if nested
+        let [index1, index2] = index
+        
+        if (index1 === 0) {
+          // manipulate buildUiItemsCopy?
+          // return concated version
+          let temp = buildUiItemsCopy.slice(1) // stuff afterwards to add back later
+          let pulledOut = buildUiItemsCopy[index1][index2]
+          let nestedArray = buildUiItemsCopy[index1];
+          // case 1.25 [[{div}, {button}], {input}] => [{div}, {button}, {input}]
+      
+          if (nestedArray.length === 2) {
+            buildUiItemsCopy = buildUiItemsCopy[index1].concat(temp)
+            console.log('updated buildUiItems: ', buildUiItemsCopy)
+          } else if(nestedArray.length > 2) {
+            // [[{div}, {button}, {input}]] => [[{div}, {input}], {button}]
+            console.log(pullOut(nestedArray, index2))
+          }
+          // {div} index1
+          // index1& index2 ({button}) => index1+1 (1)
+          // if there was anything in buildUiItemsCopy at index 1 and onwards, just add it to the back
+        }
+
+        return { ...state, buildUiItems: buildUiItemsCopy };
       // if (buildUiItemsCopy[index - 1].type === "div") {
       //   buildUiItemsCopy.pop();
       //   console.log("buildUiItems: ", buildUiItemsCopy);

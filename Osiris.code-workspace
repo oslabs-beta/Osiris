@@ -7,5 +7,7 @@
 			"path": "../../../Downloads/amplify"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"git.ignoreLimitWarning": true
+	}
 }
