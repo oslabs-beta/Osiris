@@ -101,7 +101,9 @@ function Generator(props) {
 
 	return (
 		<div className="generator-container">
-			<h1 className="heading-generator">UI Generator</h1>
+			<div className="genHead">
+				<h1 className="heading-generator">UI Generator</h1>
+			</div>
 			<div className="top-container">
 				<input type="file" accept="image/x-png,image/gif,image/jpeg" onChange={handleFileChange} />
 				<div className="image-container">

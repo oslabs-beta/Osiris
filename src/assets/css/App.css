@@ -25,15 +25,20 @@ body {
 
 .navbar ul {
   list-style-type: none;
+  margin-right: 10px;
 }
 
 .navbar li {
   font-weight: bold;
   padding: 10px;
-  border-radius: 5px;
-  /* border: 1px solid #1a3643; */
-  margin: 5px;
+  border-radius: 1px;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  margin: 10px;
   text-decoration:none;
+  display: flex;
+  justify-content: center;
+  width: fit-content;
   /* background-color: #1a3643; */
   
 }

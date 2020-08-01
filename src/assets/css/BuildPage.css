@@ -1,3 +1,7 @@
+.buildPage {
+  background-image: url('../images/grey-wp.jpg');
+}
+
 .buildPageTop {
   display: grid;
   grid-template-columns: 75% 1fr;
@@ -25,7 +29,6 @@
 
 .codeDisplayContainer {
   padding-bottom: 25px;
-
 }
 
 .hierarchy-container {
@@ -61,14 +64,17 @@ code {
     /*padding-left: 25px; */
 }
 
-.buildPage {
-  background-image: url('../images/blue_bg_please.jpg');
-  color: white
-}
-
 h1 {
   font-size: 24px;
 }
+.buildPageHeader {
+  border-bottom: 2px solid #d28e4f;
+  border-top: 1px solid #d28e4f;
+  background-color: #1a3643;
+  opacity: .6;
+  color: white;
+}
+
 
 button {
   margin-left: 5px;

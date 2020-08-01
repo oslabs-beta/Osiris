@@ -1,14 +1,13 @@
-
-
 .libraryContainer {
   grid-column: 2;
   /* display:flex; */
   overflow-y: scroll;
   max-height: 768px;
   /* justify-content: center; */
-  background-image: url('../images/blue_bg_please.jpg');
+  background-image: url('../images/grey-wp.jpg');
   background-repeat: repeat;
-  
+  border-bottom: 1px solid #d28e4f;
+  border-top: 1px solid #d28e4f;
 }
 
 .ui-library {
@@ -24,11 +23,15 @@
 h1 {
   display: flex;
   justify-content: center;
+  opacity: 1;
 }
 
-
 .libraryHeader{
-  color: white;
+  color:white;
+  border-bottom: 2px solid white;
+  border-top: 1px solid white;
+  background-color: #1a3643;
+  opacity: .6;
   /* box-shadow: 0px 10px 14px -7px #276873;
 	background-color:black;
 	border-radius:8px;
