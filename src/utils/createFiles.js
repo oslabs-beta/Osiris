@@ -1,7 +1,5 @@
 import fs from "fs";
-import {
-  format
-} from "prettier";
+import { format } from "prettier";
 import componentRender from "./componentRender.js";
 
 const createFiles = async (items, path, DLFileName, selectedState) => {
@@ -17,21 +15,29 @@ const createFiles = async (items, path, DLFileName, selectedState) => {
     }
   }
 
-  console.log(format)
+  console.log(path);
+  console.log("selectedState ", selectedState);
+  console.log("items: ", items);
+  console.log("file name: ", DLFileName);
 
-  await fs.writeFile(
-    `${dir}/${DLFileName}.jsx`,
-    format(componentRender(items, selectedState, DLFileName), {
-      singleQuote: true,
-      trailingComma: "es5",
-      bracketSpacing: true,
-      jsxBracketSameLine: true,
-      // parser: "babel",
-    }),
-    (err) => {
-      console.warn(err);
-    }
-  );
+  try {
+    await fs.writeFile(
+      `${dir}/${DLFileName}.jsx`,
+      // format(componentRender(items, selectedState, DLFileName), {
+      format(items, {
+        singleQuote: true,
+        trailingComma: "es5",
+        bracketSpacing: true,
+        jsxBracketSameLine: true,
+        // parser: "babel",
+      }),
+      (err) => {
+        console.warn(err);
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export default createFiles;
