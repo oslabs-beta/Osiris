@@ -35,7 +35,6 @@ const UiLibrary = (props) => {
 			<div className="libraryHeader">
 				<h1>UiLibrary</h1>
 			</div>
-			<TopContainer />
 			<div className="ui-library">{renderItems()}</div>
 		</div>
 	);
