@@ -260,6 +260,8 @@ export const MyProvider = (props) => {
 				// case 1.5 [{input},[{div}, {button}], {input2}] => [{input},{div}, {button}, {input2}]
 				// case 2 [[[{div}, {button}]]] => case 1 [[{div}, {button}]] => [{div}, {button}]
 				// case 3: [{div}, [{div}, {input}]]
+				// case 4: [[{div},{button},{input}]] => [[{div},{input}], {button}]
+				// case 5: [[{div},{button},{input}]] => [[{div},{button}], {input}]
 				buildUiItemsCopy = [ ...state.buildUiItems ];
 				// index = buildUiItemsCopy.indexOf(action.payload);
 				let id = action.payload.buildId;
@@ -278,14 +280,15 @@ export const MyProvider = (props) => {
 					let pulledOut = buildUiItemsCopy[index1][index2];
 					let nestedArray = buildUiItemsCopy[index1];
 					// case 1.25 [[{div}, {button}], {input}] => [{div}, {button}, {input}]
-
+					console.log('nestedArray', nestedArray);
 					if (nestedArray.length === 2) {
 						buildUiItemsCopy = buildUiItemsCopy[index1].concat(temp);
 						pulledOut.level -= 1;
-						console.log('nestedArr.length =2, pulledout level', pulledOut.level);
+						console.log('nestedArr.length = 2, pulledout level', pulledOut.level);
 						// console.log('updated buildUiItems: ', buildUiItemsCopy);
 					} else if (nestedArray.length > 2) {
-						// [[{div}, {button}, {input}], {}, {}] => [[{div}, {input}], {button},{},{}] // index = [0,1]
+						console.log('case 4 & 5')
+						// case 4 & 5 [[{div}, {button}, {input}], {}, {}] => [[{div}, {input}], {button},{},{}] // index = [0,1]
 						const updatedNestedArray = pullOut(nestedArray, index2); // [{div}, [input]]
 						pulledOut.level -= 1;
 						// replace old nested array with new one without the pulled out object
@@ -293,8 +296,13 @@ export const MyProvider = (props) => {
 						// put pulledOut into the index1 + 1
 						const afterIndex1 = buildUiItemsCopy.slice(index1 + 1); // [{}, {}]
 						const beforeIndex1 = buildUiItemsCopy.slice(0, index1); // [[{div}, {input}]]
-						beforeIndex1[index1 + 1] = pulledOut; // [[{div}, {input}], {button}]
-						beforeIndex1.concat(afterIndex1); // [[{div}, {input}], {button},{},{}]
+						// console.log('before index: ', beforeIndex1)
+						// console.log('buildUiItemsCopy[index1] ', buildUiItemsCopy[index1])
+						// console.log('pulledOut item: ', pulledOut);
+						// console.log('after index: ', afterIndex1);
+						// beforeIndex1[index1 + 1] = pulledOut; // [[{div}, {input}], {button}]
+						// beforeIndex1.concat(afterIndex1); // [[{div}, {input}], {button},{},{}]
+						buildUiItemsCopy = [...beforeIndex1, buildUiItemsCopy[index1], pulledOut, ...afterIndex1]
 					}
 					// {div} index1
 					// index1& index2 ({button}) => index1+1 (1)

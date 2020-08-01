@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import BuildItem from '../components/BuildItem.jsx';
 import createFiles from '../utils/createFiles.js';
+import componentRender from '../utils/componentRender.js';
 
 const IPC = require('electron').ipcRenderer;
 
@@ -9,11 +10,21 @@ const CodeDisplayContainer = (props) => {
 	const [ DLFileName, setDLFileName ] = useState('');
 	const [ selectedState, setSelectedState ] = useState('noState');
 	const [ path, setPath ] = useState('');
+	const [ codeStr, setCodeStr ] = useState('');
 
-	const { items } = props;
+	let { items } = props;
+
+	useEffect(() => {
+		
+		console.log('useEffect props: ', props)
+		console.log('useEffect renderCode', props.items)
+		if(props.items !== undefined) {
+			console.log('rendercode')
+			renderCode(props.items);}
+	}, [props.items])
 
 	function handleDownload() {
-		createFiles(items, path, DLFileName, selectedState);
+		createFiles(codeStr, path, DLFileName, selectedState);
 	}
 
 	function onChangeDL(e) {
@@ -33,10 +44,6 @@ const CodeDisplayContainer = (props) => {
 	}
 
 	function renderCode(items) { 
-		// return items.map((code) => {
-		// 	if (Array.isArray(item)) return renderItems(item);
-		// 	return <BuildItem id={item.id} key={item.buildId} item={item} />;
-		// });
 		let code = '';
 		
 		items.forEach(item => {
@@ -46,11 +53,16 @@ const CodeDisplayContainer = (props) => {
 				code += handleNested(item, code);
 			} else {
 				//close type tag
-				code += `<${item.type}></${item.type}>\n`
+				code += `${item.react_code}\n`
 			}
 		});
 
-		return code;
+		console.log('selectedState ', selectedState)
+		console.log('DLFileName ', DLFileName)
+		const reactCode = componentRender(code, selectedState, DLFileName);
+		setCodeStr(reactCode);
+		console.log('componetRenderer result: ', reactCode)
+		 return componentRender(code, selectedState, DLFileName);
 	}
 
 	function handleNested(items) {
@@ -75,8 +87,8 @@ const CodeDisplayContainer = (props) => {
 		<div className="codeDisplay">
 			<div className='codeDisplayContainer'>
 				<h1>CODE DISPLAY</h1>	
+				<pre><code>{codeStr}</code></pre>
 			</div>
-			<pre><code>{items && renderCode(items)}</code></pre>
 			<div className="downloadButton">
 				<select name="stateSelection" id="stateOptions" onChange={handleDropDown} default="noState">
 					<option value="noState">No State</option>

@@ -1,4 +1,4 @@
-const componentRender = (componentsArr, selectedState, title) => {
+const componentRender = (componentsStr, selectedState, title) => {
   switch (selectedState) {
     case "classState":
       return `
@@ -12,7 +12,7 @@ const componentRender = (componentsArr, selectedState, title) => {
         render() {
           return (
             <div>
-            ${componentsArr.map((child) => child.react_code).join("\n")}
+            ${componentsStr}
             </div>
           )
           }
@@ -27,7 +27,7 @@ const componentRender = (componentsArr, selectedState, title) => {
       const ${title} = props => (
         const [state, setState] = useState('')
           <div>
-          ${componentsArr.map((child) => child.react_code).join("\n")}
+          ${componentsStr}
           </div>
           );
 
@@ -38,7 +38,7 @@ const componentRender = (componentsArr, selectedState, title) => {
 
       const ${title} = props => (
           <div>
-          ${componentsArr.map((child) => child.react_code).join("\n")}
+          ${componentsStr}
           </div>
           );
 
