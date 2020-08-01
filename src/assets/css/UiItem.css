@@ -1,7 +1,7 @@
 .oneUIBox {
   margin: 10px;
   max-width: 500px;
-  max-height: 500px;
+  max-height: 450px;
   background-color: white;/* #c3d3d0; */
     border-radius: 10px;
 
@@ -39,7 +39,7 @@ h2 {
   background: #CFD8DC;
   font: 14px/1 sans-serif;
   color: black;
-  padding: 0.5em 1em;
+  padding: 1.2em 1em;
   /*padding: 0.5rem 1rem; */
   border-radius: 4px;
 

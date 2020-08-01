@@ -3,10 +3,17 @@
   flex-direction: column;
   height: 100%;
   grid-column: 2;
-  padding-left: 15px;
-  background-image: url('../images/blue_bg_please.jpg');
+  padding-left: 2px;
+  background-image: url('../images/grey-wp.jpg');
   background-repeat: repeat;
-  color: white
+  color: white;
+}
+
+.genHead {
+  border-bottom: 2px solid white;
+  border-top: 1px solid white;
+  background-color: #1a3643;
+  opacity: .6;
 }
 
 .generator-container button {
