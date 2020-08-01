@@ -6,6 +6,7 @@
   padding-left: 15px;
   background-image: url('../images/blue_bg_please.jpg');
   background-repeat: repeat;
+  color: white
 }
 
 .generator-container button {

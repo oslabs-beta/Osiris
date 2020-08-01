@@ -7,7 +7,7 @@ const LeftContainer = (props) => {
   const { globalState } = React.useContext(Context);
 
   return (
-    <div className="leftContainer">
+    <div className="HierarchyContainer">
       <h1>Hierarchy</h1>
     </div>
   );
