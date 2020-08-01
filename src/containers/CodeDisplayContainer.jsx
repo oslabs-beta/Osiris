@@ -1,11 +1,11 @@
-import '../assets/css/TopContainer.css';
+// import '../assets/css/TopContainer.css';
 import React, { useState, useEffect } from 'react';
 import BuildItem from '../components/BuildItem.jsx';
 import createFiles from '../utils/createFiles.js';
 
 const IPC = require('electron').ipcRenderer;
 
-const TopContainer = (props) => {
+const CodeDisplayContainer = (props) => {
 	const [ DLFileName, setDLFileName ] = useState('');
 	const [ selectedState, setSelectedState ] = useState('noState');
 	const [ path, setPath ] = useState('');
@@ -32,17 +32,51 @@ const TopContainer = (props) => {
 		IPC.send('choose_app_dir');
 	}
 
-	function renderItems(items) {
-		return items.map((item) => {
-			if (Array.isArray(item)) return renderItems(item);
-			return <BuildItem id={item.id} key={item.buildId} item={item} />;
+	function renderCode(items) { 
+		// return items.map((code) => {
+		// 	if (Array.isArray(item)) return renderItems(item);
+		// 	return <BuildItem id={item.id} key={item.buildId} item={item} />;
+		// });
+		let code = '';
+		
+		items.forEach(item => {
+			//base case, not nested
+			if (Array.isArray(item)) {
+				// if nested [[{div},{button}]]
+				code += handleNested(item, code);
+			} else {
+				//close type tag
+				code += `<${item.type}></${item.type}>\n`
+			}
 		});
+
+		return code;
+	}
+
+	function handleNested(items) {
+		let openinghalf ='';
+		let closinghalf ='';
+
+		// loop through each item
+		for (let i = 0; i< items.length; i+=1) 
+		{
+			if (items[i].type === 'div') { // worry about forms later maybe with obj? - Garrett the iPad artist and life style guru
+				openinghalf += '<div>\n'
+				closinghalf += '</div>\n'
+			} else {
+				openinghalf += `  ${items[i].react_code}\n`
+			}
+		}
+
+		return openinghalf + closinghalf;
 	}
 
 	return (
-		<div className="topContainer">
-			TOP CONTAINER
-			{items && renderItems(items)}
+		<div className="codeDisplay">
+			<div className='codeDisplayContainer'>
+				<h1>CODE DISPLAY</h1>	
+			</div>
+			<pre><code>{items && renderCode(items)}</code></pre>
 			<div className="downloadButton">
 				<select name="stateSelection" id="stateOptions" onChange={handleDropDown} default="noState">
 					<option value="noState">No State</option>
@@ -57,4 +91,4 @@ const TopContainer = (props) => {
 	);
 };
 
-export default TopContainer;
+export default CodeDisplayContainer;
