@@ -80,4 +80,8 @@ button {
   margin-left: 5px;
 }
 
-
+.bottom-container {
+  /* position: fixed; */
+  overflow-y: scroll;
+  max-height: 768px;
+}

@@ -21,9 +21,10 @@ const BuildItem = (props) => {
     console.log('rightArrow', e.target.id)  
     dispatch({ type: 'rightClick', payload: props.item})
   }
-
+  // console.log(`items MyProvider level of ${props.item.file_name}: ${props.item.level}`)
+  // console.log('id ',props.id, ` items hierarchy map level: ${props.item.file_name} `, props.level)
   return (
-    <div>
+    <div className={`itemLevel${props.item.level}`}>
       <li>{props.item.file_name}</li>
       <i id={props.id} onClick={upArrowClick} className="fas fa-arrow-up"></i>
       <i id={props.id} onClick={downArrowClick} className="fas fa-arrow-down"></i>

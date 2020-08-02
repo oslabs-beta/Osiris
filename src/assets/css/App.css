@@ -4,7 +4,7 @@
   width: 100%;
   height: 100%;
   margin: 0 auto;
-  background-image: url("../images/grey-wp.jpg");
+  background-image: url("../images/d2052-swatch.jpg");
 }
 
 body {
@@ -22,7 +22,7 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   font-size: 22px;
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 .navbar ul {
