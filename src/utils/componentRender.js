@@ -11,8 +11,7 @@ const componentRender = (componentsStr, selectedState, title) => {
         }
         render() {
           return (
-            <div>
-            ${componentsStr}
+            <div>${componentsStr}
             </div>
           )
           }

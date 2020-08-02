@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import BuildItem from "../components/BuildItem.jsx";
 import createFiles from "../utils/createFiles.js";
 import componentRender from "../utils/componentRender.js";
-
 const IPC = require("electron").ipcRenderer;
 
 const CodeDisplayContainer = (props) => {
@@ -54,34 +53,39 @@ const CodeDisplayContainer = (props) => {
         code += handleNested(item, code);
       } else {
         //close type tag
-        code += `${item.react_code}\n`;
+        code += `\n\t\t${item.react_code}`;
       }
     });
 
     console.log("selectedState ", selectedState);
     console.log("DLFileName ", DLFileName);
     const reactCode = componentRender(code, selectedState, DLFileName);
+    // setCodeStr(reactCode);
     setCodeStr(reactCode);
     console.log("componetRenderer result: ", reactCode);
     return componentRender(code, selectedState, DLFileName);
   }
 
   function handleNested(items) {
-    let openinghalf = "";
-    let closinghalf = "";
-
+    let openingHalf = "\n\t\t<div>";
+    let closingHalf = "\n\t\t</div'>";
+    let counter = 0;
     // loop through each item
-    for (let i = 0; i < items.length; i += 1) {
+    for (let i = 1; i < items.length; i += 1) {
       if (items[i].type === "div") {
-        // worry about forms later maybe with obj? - Garrett the iPad artist and life style guru
-        openinghalf += "<div>\n";
-        closinghalf += "</div>\n";
+        openingHalf += "\n\t\t\t<div>";
+        closingHalf = "\n\t\t\t</div>" + closingHalf;
+        counter ++;
       } else {
-        openinghalf += `  ${items[i].react_code}\n`;
+        if (counter === 0) {
+          openingHalf += `\n\t\t\t${items[i].react_code}`;
+        } else {
+          openingHalf += `\n\t\t\t\t${items[i].react_code}`;
+        }
       }
     }
 
-    return openinghalf + closinghalf;
+    return openingHalf + closingHalf;
   }
 
   return (

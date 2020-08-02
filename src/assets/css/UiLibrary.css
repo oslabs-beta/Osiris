@@ -2,7 +2,7 @@
   grid-column: 2;
   /* display:flex; */
   overflow-y: scroll;
-  max-height: 768px;
+  min-height: 768px;
   /* justify-content: center; */
   background-image: url('../images/grey-wp.jpg');
   background-repeat: repeat;
