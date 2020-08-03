@@ -5,6 +5,7 @@
   height: 100%;
   margin: 0 auto;
   background-image: url("../images/d2052-swatch.jpg");
+  position: fixed;
 }
 
 body {
@@ -23,6 +24,7 @@ body {
   justify-content: flex-start;
   font-size: 22px;
   opacity: 0.8;
+  /* position: fixed; */
 }
 
 .navbar ul {
