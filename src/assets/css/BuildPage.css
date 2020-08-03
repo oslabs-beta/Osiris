@@ -1,5 +1,5 @@
 .buildPage {
-  background-image: url('../images/grey-wp.jpg');
+  background-image: url("../images/grey-wp.jpg");
 }
 
 .buildPageTop {
@@ -17,7 +17,7 @@
 
 .codeDisplay {
   grid-column: 1;
-  display: flex; 
+  display: flex;
   height: 100%;
   flex-direction: column;
   justify-content: center;
@@ -49,19 +49,20 @@ pre {
   white-space: pre-wrap;
   white-space: -moz-pre-wrap;
   white-space: -o-pre-wrap;
-  word-wrap: break-word;}
+  word-wrap: break-word;
+}
 
 code {
-  font-family: Courier, 'New Courier', monospace;
+  font-family: Courier, "New Courier", monospace;
   font-size: 12px;
 }
-  
+
 .codeDisplayContainer {
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   /* margin: 1em 0; */
-    /*padding-left: 25px; */
+  /*padding-left: 25px; */
 }
 
 h1 {
@@ -71,10 +72,9 @@ h1 {
   border-bottom: 2px solid #d28e4f;
   border-top: 1px solid #d28e4f;
   background-color: #1a3643;
-  opacity: .6;
+  opacity: 0.6;
   color: white;
 }
-
 
 button {
   margin-left: 5px;

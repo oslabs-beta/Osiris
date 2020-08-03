@@ -26,8 +26,7 @@ const componentRender = (componentsStr, selectedState, title) => {
       const ${title} = props => {
         const [state, setState] = useState('')
         return (
-          <div>
-          ${componentsStr}
+          <div>${componentsStr}
           </div>
         )
       };
@@ -38,8 +37,7 @@ const componentRender = (componentsStr, selectedState, title) => {
 			return `import React from 'react';
 
       const ${title} = props => (
-          <div>
-          ${componentsStr}
+          <div>${componentsStr}
           </div>
           );
 
