@@ -54,8 +54,8 @@ function pullOut(arr, targetIndex) {
 	// pull out target and return updated nested arr
 	if (targetIndex === 0) return arr;
 	return arr.filter((el, index) => {
-		if(index === targetIndex) el.level--;
-		return index !== targetIndex
+		if (index === targetIndex) el.level--;
+		return index !== targetIndex;
 	});
 
 	// [[{div}, {button}, {input}, {input2}]] => [[{div}, {input}, {input2}], {button}] // return [{div}, {input}, {input2}]
@@ -111,6 +111,11 @@ export const MyProvider = (props) => {
 				return {
 					...state,
 					uiItems: uiItemsCopy
+				};
+			case 'clearCode':
+				return {
+					...state,
+					buildUiItems: []
 				};
 			case 'updateBuildUiItems':
 				uiItemsCopy = cloneDeep(state.uiItems);
@@ -198,7 +203,6 @@ export const MyProvider = (props) => {
 					buildUiItems: buildUiItemsCopy
 				};
 			case 'leftClick':
-				
 				buildUiItemsCopy = cloneDeep(state.buildUiItems);
 
 				// index = buildUiItemsCopy.indexOf(action.payload);
@@ -235,9 +239,8 @@ export const MyProvider = (props) => {
 						updatedBuildState = shoveItIn(buildUiItemsCopy[index1 - 1], buildUiItemsCopy[index1]);
 
 						const afterIndex1 = buildUiItemsCopy.slice(index1 + 1); // [{}, {}]
-						const beforeIndex1 = buildUiItemsCopy.slice(0, index1-1); // [[{div}, {input}]]
-						buildUiItemsCopy = [...beforeIndex1, updatedBuildState, ...afterIndex1]
-						
+						const beforeIndex1 = buildUiItemsCopy.slice(0, index1 - 1); // [[{div}, {input}]]
+						buildUiItemsCopy = [ ...beforeIndex1, updatedBuildState, ...afterIndex1 ];
 					} else {
 						console.log('index', index);
 						// General Case: pushing a button/input into a nested array above it     [[{div},{button}], {button}, [{div}, {input}]] => [[{div},{button}, {button}]]
@@ -291,7 +294,7 @@ export const MyProvider = (props) => {
 						buildUiItemsCopy = buildUiItemsCopy[index1].concat(temp);
 						// console.log('updated buildUiItems: ', buildUiItemsCopy);
 					} else if (nestedArray.length > 2) {
-						console.log('case 4 & 5')
+						console.log('case 4 & 5');
 						// case 4 & 5 [[{div}, {button}, {input}], {}, {}] => [[{div}, {input}], {button},{},{}] // index = [0,1]
 						const updatedNestedArray = pullOut(nestedArray, index2); // [{div}, [input]]
 						// replace old nested array with new one without the pulled out object
@@ -304,7 +307,7 @@ export const MyProvider = (props) => {
 						// console.log('after index: ', afterIndex1);
 						// beforeIndex1[index1 + 1] = pulledOut; // [[{div}, {input}], {button}]
 						// beforeIndex1.concat(afterIndex1); // [[{div}, {input}], {button},{},{}]
-						buildUiItemsCopy = [...beforeIndex1, buildUiItemsCopy[index1], pulledOut, ...afterIndex1]
+						buildUiItemsCopy = [ ...beforeIndex1, buildUiItemsCopy[index1], pulledOut, ...afterIndex1 ];
 					}
 					// {div} index1
 					// index1& index2 ({button}) => index1+1 (1)
