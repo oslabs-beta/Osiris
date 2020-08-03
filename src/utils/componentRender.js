@@ -1,7 +1,7 @@
 const componentRender = (componentsStr, selectedState, title) => {
-	switch (selectedState) {
-		case 'classState':
-			return `
+  switch (selectedState) {
+    case "classState":
+      return `
         import React, { Component } from 'react';
 
         class ${title} extends Component {
@@ -19,33 +19,31 @@ const componentRender = (componentsStr, selectedState, title) => {
         export default ${title};
       `;
 
-		case 'hooksState':
-			return `
+    case "hooksState":
+      return `
       import React, { useState } from 'react';
 
       const ${title} = props => {
         const [state, setState] = useState('')
         return (
-          <div>
-          ${componentsStr}
+          <div>${componentsStr}
           </div>
         )
       };
 
           export default ${title};
           `;
-		default:
-			return `import React from 'react';
+    default:
+      return `import React from 'react';
 
       const ${title} = props => (
-          <div>
-          ${componentsStr}
+          <div>${componentsStr}
           </div>
           );
 
           export default ${title};
           `;
-	}
+  }
 };
 
 export default componentRender;
