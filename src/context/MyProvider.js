@@ -70,7 +70,8 @@ export const MyProvider = (props) => {
 	const initialState = {
 		uiItems: [],
 		details: {},
-		buildUiItems: []
+		buildUiItems: [],
+		language: 'react'
 	};
 
 	const [ globalState, dispatch ] = React.useReducer(reducer, initialState);
@@ -115,6 +116,7 @@ export const MyProvider = (props) => {
 			case 'clearCode':
 				return {
 					...state,
+					language: 'react',
 					buildUiItems: []
 				};
 			case 'updateBuildUiItems':
@@ -315,6 +317,8 @@ export const MyProvider = (props) => {
 					console.log('updated buildUiItemsCopy: ', buildUiItemsCopy);
 				}
 				return { ...state, buildUiItems: buildUiItemsCopy };
+			case 'change_language':
+				return { ...state, language: action.payload };
 			default:
 				return state;
 		}

@@ -12,7 +12,7 @@ const CodeDisplayContainer = (props) => {
   const [selectedState, setSelectedState] = useState("noState");
   const [path, setPath] = useState("");
   const [codeStr, setCodeStr] = useState("");
-  const [language, setLanguage] = useState("react");
+  // const [language, setLanguage] = useState("react");
 
   const { globalState, dispatch } = React.useContext(Context);
   let { items } = props;
@@ -34,13 +34,13 @@ const CodeDisplayContainer = (props) => {
     setSelectedState("noState");
     setPath("");
     setCodeStr("");
-    setLanguage("react");
   }
 
   function handleDownload() {
     let codeStr = renderCode(items);
     console.log(`codeStr `, codeStr);
-    createFiles(codeStr, path, DLFileName, selectedState);
+    console.log(`globalState.language `, globalState.language);
+    createFiles(codeStr, path, DLFileName, selectedState, globalState.language);
     alert("File Downloaded! Osiris is pieced together again, thank you!");
     clear();
   }
@@ -51,12 +51,12 @@ const CodeDisplayContainer = (props) => {
 
   function languageDropDown(e) {
     console.log(e.target.value);
-    setLanguage(e.target.value);
+    dispatch({type: 'change_language', payload: e.target.value});
     renderCode(items, selectedState, e.target.value);
   }
   function handleDropDown(e) {
     setSelectedState(e.target.value);
-    renderCode(items, e.target.value, language);
+    renderCode(items, e.target.value);
   }
 
   function pickDirectory(e) {
@@ -70,7 +70,7 @@ const CodeDisplayContainer = (props) => {
   function renderCode(
     items,
     stateSelection = selectedState,
-    language = "react"
+    language = globalState.language
   ) {
     let code = "";
 
@@ -134,13 +134,13 @@ const CodeDisplayContainer = (props) => {
       <div className="downloadButton">
         <select
           name="languageSelection"
-          default="react"
+          default={globalState.language}
           onChange={languageDropDown}
         >
           <option value="react">React</option>
           <option value="vue">Vue</option>
         </select>
-        {language === "react" && (
+        {globalState.language === "react" && (
           <select
             name="stateSelection"
             id="stateOptions"
@@ -152,7 +152,7 @@ const CodeDisplayContainer = (props) => {
             <option value="hooksState">Hooks</option>
           </select>
         )}
-        {language === "vue" && (
+        {globalState.language === "vue" && (
           <select
             name="stateSelection"
             id="stateOptions"
@@ -166,7 +166,7 @@ const CodeDisplayContainer = (props) => {
         <input
           type="text"
           value={DLFileName}
-          placeholder="e.g. Button, Div"
+          placeholder="File/Component Name"
           onChange={onChangeDL}
         />
         <button onClick={pickDirectory}>Pick Directory</button>
