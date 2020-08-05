@@ -1,6 +1,7 @@
 // import "../assets/css/LeftContainer.css";
 import React, { useState } from "react";
 import { Context } from "../context/MyProvider.js";
+const cloneDeep = require("lodash.clonedeep");
 import UiLibrary from "./UiLibrary.jsx";
 
 const LeftContainer = (props) => {
@@ -54,7 +55,7 @@ const LeftContainer = (props) => {
     e.preventDefault();
     console.log("globalState clickedItem: ", globalState.clickedItem);
     console.log("react_code ", globalState.clickedItem.react_code);
-    let code = globalState.clickedItem.react_code;
+    let code = cloneDeep(globalState.clickedItem.react_code);
     let style;
     let splitCode;
     if (
@@ -76,6 +77,7 @@ const LeftContainer = (props) => {
       style = `{{listStyleType: 'none', margin: 0, overflow: 'hidden', backgroundColor: '${navColor}'}}>${navName}`;
     } else if (globalState.clickedItem.type === "button") {
       splitCode = code.split("{}>");
+      console.log(splitCode);
       style = `{{width: '${buttonStyle.width}', height: '${buttonStyle.height}', borderRadius: '${buttonStyle.borderRadius}', border: '${buttonStyle.border}', backgroundColor: '${buttonStyle.backgroundColor}', boxShadow:'${buttonStyle.boxShadow}', fontWeight: '${input.fontWeight}', fontFamily: '${input.fontFamily}', fontColor: '${input.fontColor}', fontStyle: '${input.fontStyle}'}}>${innerHTML}`;
     }
 
