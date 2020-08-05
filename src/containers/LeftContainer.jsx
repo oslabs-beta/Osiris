@@ -10,22 +10,22 @@ const LeftContainer = (props) => {
   const [navName, setNavName] = useState("");
   const [navColor, setNavColor] = useState("");
   const [buttonStyle, setButtonStyle] = useState({
-    width: "20px",
-    height: "40px",
-    borderRadius: "5px",
-    border: "1px",
-    backgroundColor: "magenta",
-    boxShadow: "0px 1px 0px 0px gray",
-    color: "yellow",
+    width: "",
+    height: "",
+    borderRadius: "",
+    border: "",
+    backgroundColor: "",
+    boxShadow: "",
+    color: "",
   });
   const [imgSource, setImageSource] = useState({
     src: "",
   });
   const [input, setInput] = useState({
-    fontColor: "green",
-    fontWeight: "bold",
-    fontFamily: "arial",
-    fontStyle: "italic",
+    fontColor: "",
+    fontWeight: "",
+    fontFamily: "",
+    fontStyle: "",
   });
 
   function handleChange(e) {
@@ -67,7 +67,7 @@ const LeftContainer = (props) => {
       style = `{{fontColor: '${input.fontColor}', fontWeight: '${input.fontWeight}', fontFamily: '${input.fontFamily}' }}>${innerHTML}`;
     } else if (globalState.clickedItem.type === "img") {
       (splitCode = code.split("' src='' style={")),
-        (style = `'${imgSource.src.split(".")[0]}' src='${
+        (style = `${imgSource.src.split(".")[0]}' src='${
           imgSource.src
         }' style={{height: '${imgSource.height}', width: '${
           imgSource.width
