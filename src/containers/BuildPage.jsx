@@ -4,6 +4,7 @@ import { Context } from "../context/MyProvider.js";
 import UiLibrary from "./UiLibrary.jsx";
 import HierarchyContainer from "./HierarchyContainer.jsx";
 import CodeDisplayContainer from "./CodeDisplayContainer.jsx";
+import LeftContainer from "./LeftContainer.jsx";
 
 const BuildPage = (props) => {
   const { globalState, dispatch } = React.useContext(Context);
@@ -14,6 +15,7 @@ const BuildPage = (props) => {
       payload: e.target.id,
     });
   };
+
 
   return (
     <div className="buildPage">
@@ -27,6 +29,11 @@ const BuildPage = (props) => {
           <div className="hierarchy-container">
             <HierarchyContainer items={globalState.buildUiItems}/>
           </div>
+      </div>
+      <div className='main-left'>
+      {globalState.showPopup === true && (
+						<LeftContainer  />
+          )}
       </div>
       <div className="bottom-container">
         <UiLibrary page="buildpage" buttonText="Add to Build" />
