@@ -71,6 +71,8 @@ export const MyProvider = (props) => {
 		uiItems: [],
 		details: {},
 		buildUiItems: [],
+		showPopup: false,
+		clickedItem: {},
 		language: 'react'
 	};
 
@@ -99,10 +101,10 @@ export const MyProvider = (props) => {
 					uiItems: [ ...copy ]
 				};
 			case 'uiLibrary_details':
-				const detail = state.uiItems.filter((item) => item.id === parseInt(action.payload));
+				// const detail = state.uiItems.filter((item) => item.id === parseInt(action.payload));
 				return {
 					...state,
-					details: detail[0]
+					details: action.payload
 				};
 			case 'update_url':
 				// updating the url for specific uiItem
@@ -121,7 +123,19 @@ export const MyProvider = (props) => {
 				};
 			case 'updateBuildUiItems':
 				uiItemsCopy = cloneDeep(state.uiItems);
-				const newItemsCopy = uiItemsCopy.filter((item) => item.id === parseInt(action.payload))[0];
+				console.log('updateBuildUIItems action.payload: ', action.payload)
+				// const newItemsCopy = uiItemsCopy.filter((item) => item.id === parseInt(action.payload))[0];
+				const newItemsCopy = action.payload;
+				console.log('newItemsCopy: ', newItemsCopy);
+
+				// update popup if true to hide left container
+				// clear clickedItem
+				let popup = state.showPopup;
+				let clickedItem = state.clickedItem;
+				if(state.showPopup) {
+					popup = false;
+					clickedItem = {};
+				}
 
 				console.log('added item: ', newItemsCopy);
 
@@ -136,14 +150,18 @@ export const MyProvider = (props) => {
 					counter = 0;
 					return {
 						...state,
-						buildUiItems: buildUiItemsCopy
+						buildUiItems: buildUiItemsCopy,
+						showPopup: popup,
+						clickedItem: clickedItem
 					};
 				} else if (counter === 1 && toggle) {
 					buildUiItemsCopy.push(newItemsCopy);
 					counter = 0;
 					return {
 						...state,
-						buildUiItems: buildUiItemsCopy
+						buildUiItems: buildUiItemsCopy,
+						showPopup: popup,
+						clickedItem: clickedItem
 					};
 				} else {
 					return { ...state };
@@ -319,6 +337,8 @@ export const MyProvider = (props) => {
 				return { ...state, buildUiItems: buildUiItemsCopy };
 			case 'change_language':
 				return { ...state, language: action.payload };
+			case 'showPopup':
+				return {...state, showPopup: true, clickedItem: action.payload };
 			default:
 				return state;
 		}

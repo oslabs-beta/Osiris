@@ -10,14 +10,18 @@ const UiItem = (props) => {
 		if (props.page === 'uilibrary') {
 			dispatch({
 				type: 'uiLibrary_details',
-				payload: e.target.id
+				payload: props.item
 			});
 			props.history.push('/detailPage');
 		} else if (props.page === 'buildpage') {
-			dispatch({
-				type: 'updateBuildUiItems',
-				payload: e.target.id
-			});
+			if(props.type === 'div') {
+				dispatch({
+					type: 'updateBuildUiItems',
+					payload: props.item
+				});
+			} else {
+				dispatch({ type: 'showPopup', payload: props.item })
+			}
 		}
 	};
 

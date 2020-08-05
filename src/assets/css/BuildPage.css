@@ -83,5 +83,5 @@ button {
 .bottom-container {
   /* position: fixed; */
   overflow-y: scroll;
-  max-height: 768px;
+  max-height: 1000px;
 }

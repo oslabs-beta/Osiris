@@ -15,6 +15,7 @@ const UiLibrary = (props) => {
 
 			return (
 				<UiItem
+					item={item}
 					key={id}
 					file_name={file_name}
 					type={type}

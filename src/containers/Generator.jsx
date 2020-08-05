@@ -21,7 +21,11 @@ function Generator(props) {
 		buttonText: '',
 		placeholder: '',
 		image: '',
-		s3file: ''
+		s3file: '',
+		fontColor: '',
+		fontWeight: '',
+		fontFamily: '',
+		fontStyle: '',
 	});
 
 	// uploading files
@@ -44,6 +48,7 @@ function Generator(props) {
 
 	// typed input updating state
 	function handleChange(e) {
+		console.log('htmlTags: tagtype ', e.target.name, e.target.value)
 		setUserData({
 			...userData,
 			[e.target.name]: e.target.value
@@ -59,12 +64,36 @@ function Generator(props) {
 			const { htmlTags, buttonText, placeholder, searchTags, description, fileName } = userData;
 
 			let reactCode;
+
+			console.log('htmlsTags switch ', htmlTags)
+
 			switch (htmlTags) {
 				case 'button':
-					reactCode = `<${htmlTags}>${buttonText}</${htmlTags}>`;
+					reactCode = `<${htmlTags} style={}></${htmlTags}>`;
 					break;
 				case 'input':
 					reactCode = `<${htmlTags} placeholder=${placeholder}></${htmlTags}>`;
+					break;
+				case 'h1':
+					reactCode = `<${htmlTags} style={}></${htmlTags}>`;
+					break;
+				case 'h2':
+					reactCode = `<${htmlTags} style={}></${htmlTags}>`;
+					break;
+				case 'h3':
+					reactCode = `<${htmlTags} style={}></${htmlTags}>`;
+					break;
+				case 'p':
+					reactCode = `<${htmlTags} style={}></${htmlTags}>`;
+					break;
+				case 'ul':
+					reactCode = `<${htmlTags} style={}></${htmlTags}>`;
+					break;
+				case 'li':
+					reactCode = `<${htmlTags} style={}></${htmlTags}>`;
+					break;
+				case 'img':
+					reactCode = `<${htmlTags} alt='' src='' style={}/>`;
 					break;
 				default:
 					reactCode = `<${htmlTags}></${htmlTags}>`;
@@ -116,15 +145,22 @@ function Generator(props) {
 						<option value="div">Div</option>
 						<option value="button">Button</option>
 						<option value="input">Input</option>
+						<option value="h1">H1</option>
+						<option value="h2">H2</option>
+						<option value="h3">H3</option>
+						<option value="p">Paragraph</option>
+						<option value="ul">Navbar</option>
+						<option value="li">List Item</option>
+						<option value="img">Image</option>
 					</select>
-					{userData.htmlTags === 'button' && (
+					{/* {userData.htmlTags === 'button' && (
 						<input
 							name="buttonText"
 							placeholder="Button Text"
 							onChange={handleChange}
 							value={userData.buttonText}
 						/>
-					)}
+					)} */}
 					{userData.htmlTags === 'input' && (
 						<input
 							name="placeholder"

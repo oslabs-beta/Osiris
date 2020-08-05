@@ -7,6 +7,7 @@
   background-image: url('../images/grey-wp.jpg');
   background-repeat: repeat;
   color: white;
+  min-height: 1200px;
 }
 
 .genHead {
