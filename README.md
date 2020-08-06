@@ -98,7 +98,6 @@ git clone https://github.com/oslabs-beta/Osiris.git
 ```sh
 npm install
 ```
-.
 ### Connect Osiris Electron App to SQL Database with ElephantSQL 
 
 1. SQL Script
