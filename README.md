@@ -55,7 +55,7 @@ _______
 
 
 **UI Generator and Library Features**: Create custom components in React or Vue. Store your custom components securely in our UI Library powered by AWS S3
-
+<img src="https://i.ibb.co/qpQjD9c/0generator.gif">
 _______
 
 
@@ -112,10 +112,12 @@ Contributions are what make the open source community such an amazing place to b
 <!-- CONTACT -->
 ## Contact
 
-Osiris - [@osiris_io](https://twitter.com/osiris_io)
+Twitter: [@osiris_io](https://twitter.com/osiris_io)
 
-Project Link: [https://github.com/oslabs-beta/Osiris/](https://github.com/oslabs-beta/Osiris/)
+Github Link: [https://github.com/oslabs-beta/Osiris/](https://github.com/oslabs-beta/Osiris/)
 
+Website: [https://osirisdev.io](https://osirisdev.io/)
+ 
 <!--- Authors --->
 ## Authors
 ```sh
