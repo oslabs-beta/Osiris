@@ -46,6 +46,7 @@ Osiris is an all-in-one UI Component Library + Generator + Page Builder for deve
 * [PostgreSQL](https://laravel.com)
 * [Express](https://expressjs.com/)
 * [Node](https://nodejs.org/en/)
+* [Webpack](https://webpack.js.org/)
 * [AWS](https://aws.amazon.com/)
 
 <!-- USAGE EXAMPLES -->
