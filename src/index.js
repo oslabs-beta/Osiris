@@ -7,11 +7,9 @@ import { MyProvider } from "./context/MyProvider.js";
 
 Amplify.configure(awsExports);
 // create a script tag for our favicons and append the head. 
-// let favicons = `<script src="https:\/\/kit.fontawesome.com\/ff1e868718.js" crossorigin="anonymous"><\/script>`;
 const favicons = document.createElement("script");
 favicons.setAttribute("src" , "https://kit.fontawesome.com/ff1e868718.js");
 favicons.setAttribute('crossorigin', 'anonymous');
-console.log(favicons);
 document.head.appendChild(favicons);
 
 

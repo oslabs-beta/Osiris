@@ -48,7 +48,6 @@ function Generator(props) {
 
 	// typed input updating state
 	function handleChange(e) {
-		console.log('htmlTags: tagtype ', e.target.name, e.target.value)
 		setUserData({
 			...userData,
 			[e.target.name]: e.target.value
@@ -64,8 +63,6 @@ function Generator(props) {
 			const { htmlTags, buttonText, placeholder, searchTags, description, fileName } = userData;
 
 			let reactCode;
-
-			console.log('htmlsTags switch ', htmlTags)
 
 			switch (htmlTags) {
 				case 'button':
@@ -99,7 +96,7 @@ function Generator(props) {
 					reactCode = `<${htmlTags}></${htmlTags}>`;
 					break;
 			}
-			// SQL Query individual_ui table: id(auto generated), organization_id, image, tags,react_code, vue_code, file_name, type, description
+
 			// send new data to database
 			pool
 				.query(
@@ -153,14 +150,6 @@ function Generator(props) {
 						<option value="li">List Item</option>
 						<option value="img">Image</option>
 					</select>
-					{/* {userData.htmlTags === 'button' && (
-						<input
-							name="buttonText"
-							placeholder="Button Text"
-							onChange={handleChange}
-							value={userData.buttonText}
-						/>
-					)} */}
 					{userData.htmlTags === 'input' && (
 						<input
 							name="placeholder"

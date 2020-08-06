@@ -78,31 +78,59 @@ _______
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To get a local copy up and running follow these simple example steps.
+To get a local copy up and running follow these steps.
 
-### Prerequisites
+### Prerequisite Accounts
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-```sh
-npm install npm@latest -g
-```
+* ElephantSQL:
+https://www.elephantsql.com/
+
+* AWS S3 Bucket with Amplify: 
+https://docs.amplify.aws/lib/storage/getting-started/q/platform/js
 
 ### Installation
 
 1. Clone the repo
 ```sh
-git clone https://github.com/your_username_/Project-Name.git
+git clone https://github.com/oslabs-beta/Osiris.git
 ```
 2. Install NPM packages
 ```sh
 npm install
 ```
+.
+### Connect Osiris Electron App to SQL Database with ElephantSQL 
+
+1. SQL Script
+```sh
+CREATE TABLE individual_ui (id SERIAL PRIMARY KEY, organization_id VARCHAR, image, VARCHAR, tags VARCHAR, react_code VARCHAR, file_name VARCHAR, type VARCHAR, description VARCHAR);
+```
+
+2. Add pgkeys.js to /src and include the following:
+```sh
+export const PG_URI = '<your ElephantSQL uri>'
+```
+### Initialize AWS-Amplify to your project 
+
+1. Navigate to Osiris Root folder
+
+2. Install Amplify folder following these steps:
+
+https://docs.amplify.aws/start/getting-started/installation/q/integration/react
+https://docs.amplify.aws/lib/storage/getting-started/q/platform/android#initialize-amplify-storage
+
+### Run
+
+1. Run the electron app
+```sh
+npm start
+```
+
 
 <!-- CONTRIBUTING -->
-## Contributing
+### Contributing
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are what make the open source community such an amazing place to be, learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
@@ -114,11 +142,11 @@ Contributions are what make the open source community such an amazing place to b
 <!-- CONTACT -->
 ## Contact
 
-Twitter: [@osiris_io](https://twitter.com/osiris_io)
+Website: [https://osirisdev.io](https://osirisdev.io/)
 
 Github Link: [https://github.com/oslabs-beta/Osiris/](https://github.com/oslabs-beta/Osiris/)
 
-Website: [https://osirisdev.io](https://osirisdev.io/)
+Twitter: [@osiris_io](https://twitter.com/osiris_io)
  
 <!--- Authors --->
 ## Authors

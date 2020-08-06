@@ -1,10 +1,10 @@
-import "../assets/css/buildPage.css";
+import "../assets/css/BuildPage.css";
 import React, { useState } from "react";
 import { Context } from "../context/MyProvider.js";
 import UiLibrary from "./UiLibrary.jsx";
 import HierarchyContainer from "./HierarchyContainer.jsx";
 import CodeDisplayContainer from "./CodeDisplayContainer.jsx";
-import LeftContainer from "./LeftContainer.jsx";
+import StyleContainer from "./StyleContainer.jsx";
 
 const BuildPage = (props) => {
   const { globalState, dispatch } = React.useContext(Context);
@@ -30,9 +30,9 @@ const BuildPage = (props) => {
             <HierarchyContainer items={globalState.buildUiItems}/>
           </div>
       </div>
-      <div className='main-left'>
+      <div className='main-style'>
       {globalState.showPopup === true && (
-						<LeftContainer  />
+						<StyleContainer  />
           )}
       </div>
       <div className="bottom-container">

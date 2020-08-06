@@ -10,7 +10,6 @@ const UiLibrary = (props) => {
 
 	const renderItems = () => {
 		return globalState.uiItems.map((item) => {
-			// item = {id: 1, file_name: '', description: '', react_code: ''}
 			const { id, name, file_name, type, description, url } = item;
 
 			return (

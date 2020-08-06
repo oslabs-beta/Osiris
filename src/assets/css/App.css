@@ -60,7 +60,7 @@ a {
   text-decoration: none;
 }
 
-.main-left {
+.main-style {
   grid-column: 1;
   color: white;
   display: flex;

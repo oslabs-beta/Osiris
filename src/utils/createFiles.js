@@ -15,12 +15,6 @@ const createFiles = async (items, path, DLFileName, selectedState, language) => 
 		}
 	}
 
-	console.log(path);
-	console.log('selectedState ', selectedState);
-	console.log('items: ', items);
-	console.log('file name: ', DLFileName);
-	console.log('language,', language)
-
 	try {	
 		if (language === 'react') {
 			await fs.writeFile(
