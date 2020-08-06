@@ -12,16 +12,12 @@ const CodeDisplayContainer = (props) => {
   const [selectedState, setSelectedState] = useState("noState");
   const [path, setPath] = useState("");
   const [codeStr, setCodeStr] = useState("");
-  // const [language, setLanguage] = useState("react");
 
   const { globalState, dispatch } = React.useContext(Context);
   let { items } = props;
 
   useEffect(() => {
-    console.log("useEffect props: ", props);
-    console.log("useEffect renderCode", props.items);
     if (props.items !== undefined) {
-      console.log("rendercode");
       renderCode(props.items);
     }
   }, [props.items]);
@@ -38,8 +34,6 @@ const CodeDisplayContainer = (props) => {
 
   function handleDownload() {
     let codeStr = renderCode(items);
-    console.log(`codeStr `, codeStr);
-    console.log(`globalState.language `, globalState.language);
     createFiles(codeStr, path, DLFileName, selectedState, globalState.language);
     alert("File Downloaded! Osiris is pieced together again, thank you!");
     clear();
@@ -50,7 +44,6 @@ const CodeDisplayContainer = (props) => {
   }
 
   function languageDropDown(e) {
-    console.log(e.target.value);
     dispatch({type: 'change_language', payload: e.target.value});
     renderCode(items, selectedState, e.target.value);
   }
@@ -62,7 +55,6 @@ const CodeDisplayContainer = (props) => {
   function pickDirectory(e) {
     IPC.on("app_dir_selected", (event, path) => {
       setPath(path);
-      // createFiles(items, path, DLFileName, selectedState)
     });
     IPC.send("choose_app_dir");
   }
@@ -77,7 +69,6 @@ const CodeDisplayContainer = (props) => {
     items.forEach((item) => {
       //base case, not nested
       if (Array.isArray(item)) {
-        // if nested [[{div},{button}]]
         code += handleNested(item, code);
       } else {
         //close type tag
@@ -85,18 +76,14 @@ const CodeDisplayContainer = (props) => {
       }
     });
 
-    console.log("selectedState ", stateSelection);
-    console.log("DLFileName ", DLFileName);
     if (language === "react") {
       const reactCode = componentRender(code, stateSelection, DLFileName);
       setCodeStr(reactCode);
-      console.log("componentRenderer result: ", reactCode);
       return reactCode;
     }
     if (language === "vue") {
       const vueCode = vueComponentRender(code, stateSelection, DLFileName);
       setCodeStr(vueCode);
-      console.log("componentRenderer result: ", vueCode);
       return vueCode;
     }
   }

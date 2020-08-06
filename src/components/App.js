@@ -17,22 +17,17 @@ import BuildPage from "../containers/BuildPage.jsx";
 import { Context } from "../context/MyProvider.js";
 import { Storage } from "aws-amplify";
 
-const pool = new Pool({ connectionString: PG_URI });
+const pool = new Pool({ connectionString: PG_URI});
 function App() {
   const { globalState, dispatch } = React.useContext(Context);
 
   const handlePromises = (itemsFromDB) => {
-    // itemsFromDB = database data.rows
-    // map uiItemPromises => [Storage.get, Storage.get.... etc]
     const uiItemsPromises = itemsFromDB.map((obj) => {
       return Storage.get(`${obj.file_name}.jpg`);
     });
     Promise.all(uiItemsPromises).then((results) => {
-      // results = [url, url, url, etc....]
       // combining itemsFromDB with their appropriate urls
       const updateUiItems = itemsFromDB.map((item, index) => {
-        // item = {file_name, type, react_code, etc....}
-        // adding key: url, value: results[index]
         item.url = results[index];
         return item;
       });
@@ -69,9 +64,6 @@ function App() {
               <li>
                 <Link to="/buildpage">Build Page</Link>
               </li>
-              {/* <li>
-                <Link to="/detailPage">Detail Page</Link>
-              </li> */}
             </ul>
           </div>
           <Switch>

@@ -80,7 +80,7 @@ const StyleContainer = (props) => {
     }
 
     globalState.clickedItem.react_code = splitCode[0] + style + splitCode[1];
-
+    console.log(globalState.clickedItem)
     dispatch({
       type: "updateBuildUiItems",
       payload: globalState.clickedItem,
@@ -88,10 +88,8 @@ const StyleContainer = (props) => {
   }
 
   return (
-    <div className="LeftContainer">
-      <div className="leftContainerHeader">
+    <div className="StyleContainer">
         <h1>Styling</h1>
-      </div>
       <form onSubmit={handleClick}>
         {globalState.clickedItem.type === "img" && (
           <>
