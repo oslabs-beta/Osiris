@@ -68,7 +68,7 @@ _______
 ________
 
 
-**Build Page: Hierarchy & Download Code to Vue or React**:  Edit the hierarchy with simple arrow buttons. Choose to build your React page with/without State or Hooks. You can also build a Vue page with or without State. Download your page directly.
+**Build Page: Hierarchy & Download Code to Vue or React**:  Edit the hierarchy with simple arrow buttons. Choose to build your React page with/without State or Hooks. You can also build a Vue page with or without State. Lastly, download your custom page directly to your computer!
 
 <img src="https://iili.io/d1XamG.gif" alt="buildpage2">
 
