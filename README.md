@@ -53,21 +53,21 @@ Osiris is an all-in-one UI Component Library + Generator + Page Builder. for dev
 
 **UI Generator and Library Features**: Create custom components in React or Vue. Store your custom components securely in our UI Library powered by AWS S3
 
-<img src="https://i.ibb.co/z7YS90b/ui-generator.gif" />
+<img src="https://i.ibb.co/1d59ywK/ui-generator-gif.gif"/>
 
 _______
 
 
 **Build Page: Style and Add to Build**: Easily build a React or Vue page by controlling the hierarchy of your custom components stored in your library. Customize your components by adding CSS and text
 
-<img src='https://i.ibb.co/PzPfFT5/buildpage1.gif' />
+<img src='https://i.ibb.co/PzPfFT5/buildpage1.gif'/>
 
 ________
 
 
 **Build Page: Hierarchy & Download Code to Vue or React**:  Edit the hierarchy with simple arrow buttons. Choose to build your React page with/without State or Hooks. You can also build a Vue page with or without State. Download your page directly.
 
-<img src='https://i.ibb.co/1d59ywK/ui-generator-gif.gif' />
+<img src='https://i.ibb.co/1d59ywK/ui-generator-gif.gif'/>
 
 _______
 
