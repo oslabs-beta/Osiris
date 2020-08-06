@@ -38,7 +38,7 @@ An Electron based desktop application for generating components and storing them
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Osiris is an all-in-one UI Component Library + Generator + Page Builder. for developers and designers. Create and store custom, reusable components in React or Vue. Then, dynamically inject the components and manipulate their hierarchy. Finally, download the code for further development.
+Osiris is an all-in-one UI Component Library + Generator + Page Builder for developers and designers. Create and store custom, reusable components in React or Vue. Then, dynamically inject the components and manipulate their hierarchy. Finally, download the code for further development.
 
 ### Built With
 * [Electron](https://getbootstrap.com)
