@@ -4,7 +4,7 @@
   height: 100%;
   grid-column: 2;
   padding-left: 2px;
-  background-image: url('../images/grey-wp.jpg');
+  background-image: url("../images/grey-wp.jpg");
   background-repeat: repeat;
   color: white;
   min-height: 1000px;
@@ -14,7 +14,7 @@
   border-bottom: 2px solid white;
   border-top: 1px solid white;
   background-color: #1a3643;
-  opacity: .6;
+  opacity: 0.6;
 }
 
 .detail-img {
@@ -34,14 +34,14 @@ button {
   background-color: white;
 }
 
-.oneDetail {
+/* .oneDetail {
   margin: 10px;
   max-width: 300px;
   max-height: 450px;
-  background-color: white;/* #c3d3d0; */
+  background-color: white;
   border-radius: 10px;
   box-shadow: 0px 0px 20px rgba(0,0,0, .5);
-  display: flex; 
+  display: flex;
   flex-direction: column;
   box-sizing: border-box;
   min-width: 150px;
@@ -62,8 +62,53 @@ img {
   align-self: center;
   border-radius: inherit;
   /* width: 300px;
-  height: 300px */
-} 
+  height: 300px }*/
+
+.oneUIBox {
+  margin: 10px;
+  max-width: 228px;
+  max-height: 600px;
+  background-color: white; /* #c3d3d0; */
+  border-radius: 10px;
+
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-width: 150px;
+
+  min-height: 200px;
+  order: 4;
+  flex: 1;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  justify-content: center;
+  align-items: center;
+  padding: 2em 0em;
+}
+h2 {
+  overflow: hidden;
+  white-space: nowrarp;
+  text-overflow: ellipsis;
+  max-width: 250px;
+  min-width: 200px;
+  border-radius: inherit;
+  text-decoration: none;
+  background: #cfd8dc;
+  font: 14px/1 sans-serif;
+  color: black;
+  padding: 1.2em 1em;
+  /*padding: 0.5rem 1rem; */
+  border-radius: 4px;
+}
+
+img {
+  margin-top: 2em;
+  justify-self: center;
+  align-self: center;
+  border-radius: inherit;
+}
 
 .detailList {
   overflow: hidden;
@@ -73,7 +118,7 @@ img {
   min-width: 100px;
   border-radius: inherit;
   text-decoration: none;
-  background: #CFD8DC;
+  background: #cfd8dc;
   font: 14px/1 sans-serif;
   color: black;
   padding: 20px;
@@ -82,12 +127,11 @@ img {
 }
 
 button {
-    max-width: 200px;
-    max-height: 100px;
-    margin-bottom: 5px;
-    border-radius: 10px;
-    background-color: white;
-    font-family: 'Courier New', Courier, monospace;
-    text-decoration-color: blue;
-
+  max-width: 200px;
+  max-height: 100px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  background-color: white;
+  font-family: "Courier New", Courier, monospace;
+  text-decoration-color: blue;
 }
