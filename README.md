@@ -38,18 +38,7 @@ An Electron based desktop application for generating components and storing them
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need.
-
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should element DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue.
-
-A list of commonly used resources that I find helpful are listed in the acknowledgements.
+Osiris is an all-in-one UI Component Library + Generator + Page Builder. for developers and designers. Create and store custom, reusable components in React or Vue. Then, dynamically inject the components and manipulate their hierarchy. Finally, download the code for further development.
 
 ### Built With
 * [Electron](https://getbootstrap.com)
@@ -62,9 +51,9 @@ A list of commonly used resources that I find helpful are listed in the acknowle
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-**UI Generator and Library Features:** Create custom components in React or Vue. Store your custom components securely in our UI Library powered by AWS S3
+**UI Generator and Library Features**: Create custom components in React or Vue. Store your custom components securely in our UI Library powered by AWS S3
 
-<img src='https://i.ibb.co/1d59ywK/ui-generator.gif' />
+<img src="https://i.ibb.co/z7YS90b/ui-generator.gif" />
 
 _______
 
@@ -78,7 +67,7 @@ ________
 
 **Build Page: Hierarchy & Download Code to Vue or React**:  Edit the hierarchy with simple arrow buttons. Choose to build your React page with/without State or Hooks. You can also build a Vue page with or without State. Download your page directly.
 
-<img src='https://i.ibb.co/3v2RTP7/buildpage2.gif'/>
+<img src='https://i.ibb.co/1d59ywK/ui-generator-gif.gif' />
 
 _______
 
