@@ -55,7 +55,9 @@ _______
 
 
 **UI Generator and Library Features**: Create custom components in React or Vue. Store your custom components securely in our UI Library powered by AWS S3
+
 <img src="https://i.ibb.co/6vTMGSC/generator1.gif">
+
 _______
 
 
