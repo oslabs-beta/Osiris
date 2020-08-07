@@ -150,11 +150,11 @@ Twitter: [@osiris_io](https://twitter.com/osiris_io)
 <!--- Authors --->
 ## Authors
 ```sh
-Wayne Wilcox: @LovelaceDink
-Eelan Tung: @cupofjoy
-Cameron Fitz: @cameronleefitz
-Jehovany Cruz: @howaboutjeho
-Garrett Lee: @geewailee
+Wayne Wilcox: [https://github.com/LovelaceDink](https://github.com/LovelaceDink)
+Eelan Tung: [https://github.com/cupofjoy](https://github.com/cupofjoy)
+Cameron Fitz: [https://github.com/cameronleefitz](https://github.com/cameronleefitz)
+Jehovany Cruz: [hhttps://github.com/howaboutjeho](https://github.com/howaboutjeho)
+Garrett Lee: [https://github.com/geewailee](https://github.com/geewailee)
 ```
 <!-- LICENSE -->
 ## License
