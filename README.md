@@ -42,7 +42,7 @@ Osiris is an all-in-one UI Component Library + Generator + Page Builder for deve
 
 ### Built With
 * [Electron](https://getbootstrap.com)
-* [React](https://jquery.com)
+* [React](https://reactjs.org/)
 * [PostgreSQL](https://laravel.com)
 * [Node](https://nodejs.org/en/)
 * [Webpack](https://webpack.js.org/)
