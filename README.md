@@ -102,7 +102,7 @@ npm install
 
 1. SQL Script
 ```sh
-CREATE TABLE individual_ui (id SERIAL PRIMARY KEY, organization_id VARCHAR, image, VARCHAR, tags VARCHAR, react_code VARCHAR, file_name VARCHAR, type VARCHAR, description VARCHAR);
+CREATE TABLE individual_ui (id SERIAL PRIMARY KEY, organization_id VARCHAR, image VARCHAR, tags VARCHAR, react_code VARCHAR, file_name VARCHAR, type VARCHAR, description VARCHAR);
 ```
 
 2. Add pgkeys.js to /src and include the following:
