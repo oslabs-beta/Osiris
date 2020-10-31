@@ -1,7 +1,12 @@
 "use strict";
 
 // Import parts of electron to use
-const { app, BrowserWindow, ipcMain, dialog } = require("electron");
+const {
+  app,
+  BrowserWindow,
+  ipcMain,
+  dialog
+} = require("electron");
 const path = require("path");
 const url = require("url");
 
@@ -68,9 +73,19 @@ function createWindow() {
       pathname: path.join(__dirname, "dist", "index.html"),
       slashes: true,
     });
+    // indexPath = url.format({
+    //   protocol: "http:",
+    //   host: "localhost:8080",
+    //   pathname: "index.html",
+    //   slashes: true,
+    // });
   }
+  console.log('here', indexPath)
 
   mainWindow.loadURL(indexPath);
+
+  // and load the index.html of the app.
+  // mainWindow.loadURL(`file://${__dirname}/build/index.html`);
 
   // Don't show until we are ready and loaded
   mainWindow.once("ready-to-show", () => {
